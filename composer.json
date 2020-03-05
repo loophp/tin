@@ -1,0 +1,38 @@
+{
+    "name": "lekoala/tin",
+    "type": "library",
+    "description": "Provide validation tools for Taxpayer Identification Number",
+    "homepage": "https://github.com/lekoala/tin",
+    "license": "MIT",
+    "authors": [{
+        "name": "Thomas Portelange",
+        "email": "thomas@lekoala.be"
+    }],
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "LeKoala\\Tin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LeKoala\\Tin\\Test\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "phpcs src/ tests/",
+        "lint-clean": "phpcbf src/ tests/",
+        "test": "phpunit -v"
+    },
+    "support": {
+        "issues": "https://github.com/lekoala/tin/issues",
+        "source": "https://github.com/lekoala/tin"
+    }
+}
