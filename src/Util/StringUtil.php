@@ -78,7 +78,7 @@ class StringUtil
      * eg: A = 10
      *
      * @param string $str
-     * @return integer
+     * @return int|string
      */
     public static function getNumericValue(string $str)
     {

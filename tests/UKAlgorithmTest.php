@@ -16,6 +16,9 @@ class UKAlgorithmTest extends TestCase
     {
         $this->assertTrue(TINValid::checkTIN('uk', self::VALID_NUMBER));
         $this->assertTrue(TINValid::checkTIN('uk', self::VALID_NUMBER2));
+        $this->markTestIncomplete(
+            'Test valid number of length 8.'
+        );
     }
 
     public function testInvalidNumber()

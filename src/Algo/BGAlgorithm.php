@@ -19,7 +19,7 @@ class BGAlgorithm extends TINAlgorithm
             return StatusCode::INVALID_LENGTH;
         }
         if (!$this->isFollowPattern($tin) || !$this->isValidDate($tin)) {
-            return Statuscode::INVALID_PATTERN;
+            return StatusCode::INVALID_PATTERN;
         }
         if (!$this->isFollowRules($tin)) {
             return StatusCode::INVALID_SYNTAX;

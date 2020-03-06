@@ -11,7 +11,7 @@ interface TINAlgorithmInterface
      * Validate a tin number
      *
      * @param string $tin
-     * @return boolean
+     * @return int
      */
     public function isValid(string $tin);
 }
