@@ -1,21 +1,29 @@
 {
-    "name": "lekoala/tin",
+    "name": "loophp/tin",
     "type": "library",
     "description": "Provide validation tools for Taxpayer Identification Number",
-    "homepage": "https://github.com/lekoala/tin",
+    "homepage": "https://github.com/loophp/tin",
     "license": "MIT",
-    "authors": [{
-        "name": "Thomas Portelange",
-        "email": "thomas@lekoala.be"
-    }],
+    "authors": [
+        {
+            "name": "Thomas Portelange",
+            "email": "thomas@lekoala.be"
+        },
+        {
+            "name": "Pol Dellaiera",
+            "email": "pol.dellaiera@protonmail.com"
+        }
+    ],
     "require": {
         "php": "^7.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.0",
-        "squizlabs/php_codesniffer": "^3.5"
+        "drupol/php-conventions": "^1.6",
+        "friends-of-phpspec/phpspec-code-coverage": "^4.3",
+        "infection/infection": "^0.13.6 || ^0.15.3",
+        "phpspec/phpspec": "^5.1.2 || ^6.1.1",
+        "phpstan/phpstan-strict-rules": "^0.12.2"
     },
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "LeKoala\\Tin\\": "src/"
@@ -23,16 +31,11 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LeKoala\\Tin\\Test\\": "tests/"
+            "tests\\LeKoala\\Tin\\": "tests/src/"
         }
     },
-    "scripts": {
-        "lint": "phpcs src/ tests/",
-        "lint-clean": "phpcbf src/ tests/",
-        "test": "phpunit -v"
-    },
     "support": {
-        "issues": "https://github.com/lekoala/tin/issues",
-        "source": "https://github.com/lekoala/tin"
+        "issues": "https://github.com/loophp/tin/issues",
+        "source": "https://github.com/loophp/tin"
     }
 }

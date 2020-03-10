@@ -1,15 +1,21 @@
-inherit: true
-
 build:
-  nodes:
-    analysis:
-      tests:
-        override: [php-scrutinizer-run]
-
-checks:
-  php:
-    code_rating: true
-    duplication: true
+    nodes:
+        analysis:
+            environment:
+                php:
+                    version: 7.4
+            tests:
+                override:
+                    - php-scrutinizer-run
 
 filter:
-  paths: [src/*, tests/*]
+    paths:
+        - 'src/*'
+
+tools:
+    external_code_coverage:
+        timeout: 600
+    php_loc: true
+    php_pdepend: true
+    php_sim: true
+    php_changetracking: true

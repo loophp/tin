@@ -1,3 +1,9 @@
-vendor/
-composer.lock
-phpunit.xml
+/composer.lock
+/vendor
+/build
+/.php_cs.cache
+/example/
+/.idea/
+/test.php
+/phpspec.yml
+/infection.json

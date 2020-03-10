@@ -1,92 +1,113 @@
+[![Latest Stable Version](https://img.shields.io/packagist/v/drupol/tin.svg?style=flat-square)](https://packagist.org/packages/drupol/tin)
+ [![GitHub stars](https://img.shields.io/github/stars/drupol/tin.svg?style=flat-square)](https://packagist.org/packages/drupol/tin)
+ [![Total Downloads](https://img.shields.io/packagist/dt/drupol/tin.svg?style=flat-square)](https://packagist.org/packages/drupol/tin)
+ [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/drupol/tin/Continuous%20Integration?style=flat-square)](https://github.com/drupol/tin/actions)
+ [![Scrutinizer code quality](https://img.shields.io/scrutinizer/quality/g/drupol/tin/refactoring.svg?style=flat-square)](https://scrutinizer-ci.com/g/drupol/tin/?branch=refactoring)
+ [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/drupol/tin/refactoring.svg?style=flat-square)](https://scrutinizer-ci.com/g/drupol/tin/?branch=refactoring)
+ [![Mutation testing badge](https://badge.stryker-mutator.io/github.com/drupol/tin/refactoring)](https://stryker-mutator.github.io)
+ [![License](https://img.shields.io/packagist/l/drupol/tin.svg?style=flat-square)](https://packagist.org/packages/drupol/tin)
+ 
 # Taxpayer Identification Number (TIN) Validator
 
-[![Build Status](https://travis-ci.org/lekoala/tin.svg?branch=master)](https://travis-ci.org/lekoala/tin)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lekoala/tin/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/lekoala/tin/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/lekoala/tin/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/lekoala/tin/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/lekoala/tin/badges/build.png?b=master)](https://scrutinizer-ci.com/g/lekoala/tin/build-status/master)
-[![codecov.io](https://codecov.io/github/lekoala/tin/coverage.svg?branch=master)](https://codecov.io/github/lekoala/tin?branch=master)
+## Description
 
-[![Latest Stable Version](https://poser.pugx.org/lekoala/tin/version)](https://packagist.org/packages/lekoala/tin)
-[![Latest Unstable Version](https://poser.pugx.org/lekoala/tin/v/unstable)](//packagist.org/packages/lekoala/tin)
-[![Total Downloads](https://poser.pugx.org/lekoala/tin/downloads)](https://packagist.org/packages/lekoala/tin)
-[![License](https://poser.pugx.org/lekoala/tin/license)](https://packagist.org/packages/lekoala/tin)
-[![Monthly Downloads](https://poser.pugx.org/lekoala/tin/d/monthly)](https://packagist.org/packages/lekoala/tin)
-[![Daily Downloads](https://poser.pugx.org/lekoala/tin/d/daily)](https://packagist.org/packages/lekoala/tin)
+A library to validate TIN numbers for individuals. This is based on a Java
+library, this is why the code does not reflect best practices in php (yet).
 
-[![Dependency Status](https://www.versioneye.com/php/lekoala:tin/badge.svg)](https://www.versioneye.com/php/lekoala:tin)
-[![Reference Status](https://www.versioneye.com/php/lekoala:tin/reference_badge.svg?style=flat)](https://www.versioneye.com/php/lekoala:tin/references)
+Supported countries:
+* Austria (AT)
+* Belgium (BE)
+* Bulgaria (BG)
+* Croatia (HR)
+* Cyprus (CY)
+* Czech Republic (CZ)
+* Denmark (DK)
+* Estonia (EE)
+* Finland (FI)
+* France (FR)
+* Germany (DE)
+* Greece (GR) - only size
+* Hungary (HU)
+* Ireland (IE)
+* Italy (IT)
+* Latvia (LV) - no check digit
+* Lithuania	(LT)
+* Luxembourg (LU)
+* Malta (MT) - no check digit
+* Netherlands (NL)
+* Poland (PL)
+* Portugal (PT)
+* Romania (RO) - no check digit
+* Slovakia (SK) - only structure
+* Slovenia (SI)
+* Spain (ES)
+* Sweden (SE)
+* United Kingdom (UK) - only structure
 
-A library to validate TIN numbers for individuals. This is based on a java library,
-this is why the code does not reflect best practices in php.
+If your country is not there, feel free to open an issue with your country code,
+and a link to the specification. Ideally, you can provide a pull request with
+the algorithm and the tests.
 
-Supported countries are:
-- Austria (AT)
-- Belgium (BE)
-- Bulgaria (BG)
-- Croatia (HR)
-- Cyprus (CY)
-- Czech Republic (CZ) - no check digit (but possible czechphp/national-identification-number-validator)
-- Denmark (DK)
-- Estonia (EE)
-- Finland (FI)
-- France (FR)
-- Germany (DE)
-- Greece (GR) - only size
-- Hungary (HU)
-- Ireland (IE)
-- Italy (IT)
-- Latvia (LV) - no check digit
-- Lithuania	(LT)
-- Luxembourg (LU)
-- Malta (MT) - no check digit
-- Netherlands (NL)
-- Poland (PL)
-- Portugal (PT)
-- Romania (RO) - no check digit
-- Slovakia (SK) - only structure
-- Slovenia (SI)
-- Spain (ES)
-- Sweden (SE)
-- United Kingdom (UK) - only structure
+## Requirements
 
-If your country is not there, feel free to open an issue with your country code and
-a link to the specification. Ideally, if you can provide a PR with the algorithm and the
-test that would be even better :-)
+* PHP >= 7.1
 
-## Installation
+## Usage & API
 
-Run
+To simply check the validity of a TIN number:
 
+```php
+<?php
+
+include __DIR__ . '/vendor/autoload.php';
+
+use LeKoala\Tin\TIN;
+
+$bool = TIN::fromSlug('be71102512345')->isValid();
 ```
-$ composer require lekoala/tin
-```
-
-## Usage
-
-To simply check the validity of a number
-
-    $result = TINValid::checkTIN($countryCode, $number);
 
 If you want to get the reason why a number is invalid, you can use
 
-    try {
-        TINValid::validateTIN($countryCode, $number);
-    }
-    catch(TINValidationException $e) {
-        
-    }
+```php
+<?php
 
-If you want to see if a country is supported or not, you can simply use
+include __DIR__ . '/vendor/autoload.php';
 
-    $result = TINValid::isCountrySupported('be');
+use LeKoala\Tin\TIN;
+use LeKoala\Tin\Exception\TINException;
+
+try {
+    TIN::fromSlug('be71102512345')->check();
+} catch (TINException $e) {
+    // do something with the exception.
+}
+```
+
+## Installation
+
+```composer require drupol/tin```
+
+## Code quality, tests and benchmarks
+
+Every time changes are introduced into the library, [Github](https://github.com/drupol/tin/actions) run the tests and the benchmarks.
+
+The library has tests written with [PHPSpec](http://www.phpspec.net/).
+Feel free to check them out in the `spec` directory. Run `composer phpspec` to trigger the tests.
+
+Before each commit some inspections are executed with [GrumPHP](https://github.com/phpro/grumphp), run `./vendor/bin/grumphp run` to check manually.
+
+[PHPInfection](https://github.com/infection/infection) is used to ensure that your code is properly tested, run `composer infection` to test your code.
 
 ## Links
 
-[`TIN Algorithms - Public - Functional Specification`](<https://ec.europa.eu/taxation_customs/tin/specs/FS-TIN Algorithms-Public.docx>)
+* [`European Commission TIN service`](https://ec.europa.eu/taxation_customs/tin/)
+* [`TIN Algorithms - Public - Functional Specification`](https://ec.europa.eu/taxation_customs/tin/specs/FS-TIN%20Algorithms-Public.docx)
+* [`Taxpayer Identification Number`](https://en.wikipedia.org/wiki/Taxpayer_Identification_Number)
 
-[`Taxpayer Identification Number`](https://en.wikipedia.org/wiki/Taxpayer_Identification_Number)
+## Authors
+* [Thomas Portelange](https://github.com/lekoala)
+* [Pol Dellaiera](https://github.com/loophp)
 
-## License
+## Contributing
 
-This package is licensed using the MIT License.
-Please have a look at [`LICENSE.md`](LICENSE.md).
+Feel free to contribute to this library by sending Github pull requests. I'm quite reactive :-)
