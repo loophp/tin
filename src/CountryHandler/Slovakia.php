@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LeKoala\Tin\CountryHandler;
+namespace loophp\Tin\CountryHandler;
 
 /**
  * Slovakia.

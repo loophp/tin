@@ -26,12 +26,12 @@
     },
     "autoload": {
         "psr-4": {
-            "LeKoala\\Tin\\": "src/"
+            "loophp\\Tin\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "tests\\LeKoala\\Tin\\": "tests/src/"
+            "tests\\loophp\\Tin\\": "tests/src/"
         }
     },
     "support": {

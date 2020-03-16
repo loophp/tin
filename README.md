@@ -1,11 +1,11 @@
-[![Latest Stable Version](https://img.shields.io/packagist/v/drupol/tin.svg?style=flat-square)](https://packagist.org/packages/drupol/tin)
- [![GitHub stars](https://img.shields.io/github/stars/drupol/tin.svg?style=flat-square)](https://packagist.org/packages/drupol/tin)
- [![Total Downloads](https://img.shields.io/packagist/dt/drupol/tin.svg?style=flat-square)](https://packagist.org/packages/drupol/tin)
- [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/drupol/tin/Continuous%20Integration?style=flat-square)](https://github.com/drupol/tin/actions)
- [![Scrutinizer code quality](https://img.shields.io/scrutinizer/quality/g/drupol/tin/refactoring.svg?style=flat-square)](https://scrutinizer-ci.com/g/drupol/tin/?branch=refactoring)
- [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/drupol/tin/refactoring.svg?style=flat-square)](https://scrutinizer-ci.com/g/drupol/tin/?branch=refactoring)
- [![Mutation testing badge](https://badge.stryker-mutator.io/github.com/drupol/tin/refactoring)](https://stryker-mutator.github.io)
- [![License](https://img.shields.io/packagist/l/drupol/tin.svg?style=flat-square)](https://packagist.org/packages/drupol/tin)
+[![Latest Stable Version](https://img.shields.io/packagist/v/loophp/tin.svg?style=flat-square)](https://packagist.org/packages/loophp/tin)
+ [![GitHub stars](https://img.shields.io/github/stars/loophp/tin.svg?style=flat-square)](https://packagist.org/packages/loophp/tin)
+ [![Total Downloads](https://img.shields.io/packagist/dt/loophp/tin.svg?style=flat-square)](https://packagist.org/packages/loophp/tin)
+ [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/loophp/tin/Continuous%20Integration?style=flat-square)](https://github.com/loophp/tin/actions)
+ [![Scrutinizer code quality](https://img.shields.io/scrutinizer/quality/g/loophp/tin/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/loophp/tin/?branch=master)
+ [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/loophp/tin/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/loophp/tin/?branch=master)
+ [![Mutation testing badge](https://badge.stryker-mutator.io/github.com/loophp/tin/master)](https://stryker-mutator.github.io)
+ [![License](https://img.shields.io/packagist/l/loophp/tin.svg?style=flat-square)](https://packagist.org/packages/loophp/tin)
  
 # Taxpayer Identification Number (TIN) Validator
 
@@ -61,7 +61,7 @@ To simply check the validity of a TIN number:
 
 include __DIR__ . '/vendor/autoload.php';
 
-use LeKoala\Tin\TIN;
+use loophp\Tin\TIN;
 
 $bool = TIN::fromSlug('be71102512345')->isValid();
 ```
@@ -73,8 +73,8 @@ If you want to get the reason why a number is invalid, you can use
 
 include __DIR__ . '/vendor/autoload.php';
 
-use LeKoala\Tin\TIN;
-use LeKoala\Tin\Exception\TINException;
+use loophp\Tin\TIN;
+use loophp\Tin\Exception\TINException;
 
 try {
     TIN::fromSlug('be71102512345')->check();
@@ -85,11 +85,11 @@ try {
 
 ## Installation
 
-```composer require drupol/tin```
+```composer require loophp/tin```
 
 ## Code quality, tests and benchmarks
 
-Every time changes are introduced into the library, [Github](https://github.com/drupol/tin/actions) run the tests and the benchmarks.
+Every time changes are introduced into the library, [Github](https://github.com/loophp/tin/actions) run the tests and the benchmarks.
 
 The library has tests written with [PHPSpec](http://www.phpspec.net/).
 Feel free to check them out in the `spec` directory. Run `composer phpspec` to trigger the tests.

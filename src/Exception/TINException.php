@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LeKoala\Tin\Exception;
+namespace loophp\Tin\Exception;
 
 use Exception;
 

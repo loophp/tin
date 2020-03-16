@@ -2,38 +2,38 @@
 
 declare(strict_types=1);
 
-namespace LeKoala\Tin;
+namespace loophp\Tin;
 
-use LeKoala\Tin\CountryHandler\Austria;
-use LeKoala\Tin\CountryHandler\Belgium;
-use LeKoala\Tin\CountryHandler\Bulgaria;
-use LeKoala\Tin\CountryHandler\CountryHandlerInterface;
-use LeKoala\Tin\CountryHandler\Croatia;
-use LeKoala\Tin\CountryHandler\Cyprus;
-use LeKoala\Tin\CountryHandler\CzeckRepublic;
-use LeKoala\Tin\CountryHandler\Denmark;
-use LeKoala\Tin\CountryHandler\Estonia;
-use LeKoala\Tin\CountryHandler\Finland;
-use LeKoala\Tin\CountryHandler\France;
-use LeKoala\Tin\CountryHandler\Germany;
-use LeKoala\Tin\CountryHandler\Greece;
-use LeKoala\Tin\CountryHandler\Hungary;
-use LeKoala\Tin\CountryHandler\Ireland;
-use LeKoala\Tin\CountryHandler\Italy;
-use LeKoala\Tin\CountryHandler\Latvia;
-use LeKoala\Tin\CountryHandler\Lithuania;
-use LeKoala\Tin\CountryHandler\Luxembourg;
-use LeKoala\Tin\CountryHandler\Malta;
-use LeKoala\Tin\CountryHandler\Netherlands;
-use LeKoala\Tin\CountryHandler\Poland;
-use LeKoala\Tin\CountryHandler\Portugal;
-use LeKoala\Tin\CountryHandler\Romania;
-use LeKoala\Tin\CountryHandler\Slovakia;
-use LeKoala\Tin\CountryHandler\Slovenia;
-use LeKoala\Tin\CountryHandler\Spain;
-use LeKoala\Tin\CountryHandler\Sweden;
-use LeKoala\Tin\CountryHandler\UnitedKingdom;
-use LeKoala\Tin\Exception\TINException;
+use loophp\Tin\CountryHandler\Austria;
+use loophp\Tin\CountryHandler\Belgium;
+use loophp\Tin\CountryHandler\Bulgaria;
+use loophp\Tin\CountryHandler\CountryHandlerInterface;
+use loophp\Tin\CountryHandler\Croatia;
+use loophp\Tin\CountryHandler\Cyprus;
+use loophp\Tin\CountryHandler\CzeckRepublic;
+use loophp\Tin\CountryHandler\Denmark;
+use loophp\Tin\CountryHandler\Estonia;
+use loophp\Tin\CountryHandler\Finland;
+use loophp\Tin\CountryHandler\France;
+use loophp\Tin\CountryHandler\Germany;
+use loophp\Tin\CountryHandler\Greece;
+use loophp\Tin\CountryHandler\Hungary;
+use loophp\Tin\CountryHandler\Ireland;
+use loophp\Tin\CountryHandler\Italy;
+use loophp\Tin\CountryHandler\Latvia;
+use loophp\Tin\CountryHandler\Lithuania;
+use loophp\Tin\CountryHandler\Luxembourg;
+use loophp\Tin\CountryHandler\Malta;
+use loophp\Tin\CountryHandler\Netherlands;
+use loophp\Tin\CountryHandler\Poland;
+use loophp\Tin\CountryHandler\Portugal;
+use loophp\Tin\CountryHandler\Romania;
+use loophp\Tin\CountryHandler\Slovakia;
+use loophp\Tin\CountryHandler\Slovenia;
+use loophp\Tin\CountryHandler\Spain;
+use loophp\Tin\CountryHandler\Sweden;
+use loophp\Tin\CountryHandler\UnitedKingdom;
+use loophp\Tin\Exception\TINException;
 
 /**
  * The main class to validate TIN numbers.

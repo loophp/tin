@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace tests\LeKoala\Tin;
+namespace tests\loophp\Tin;
 
-use LeKoala\Tin\Exception\TINException;
+use loophp\Tin\Exception\TINException;
 use PhpSpec\Exception\Example\SkippingException;
 use PhpSpec\ObjectBehavior;
 

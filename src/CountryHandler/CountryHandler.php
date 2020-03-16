@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace LeKoala\Tin\CountryHandler;
+namespace loophp\Tin\CountryHandler;
 
-use LeKoala\Tin\Exception\TINException;
+use loophp\Tin\Exception\TINException;
 
 use function strlen;
 
