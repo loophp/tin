@@ -12,12 +12,12 @@ use function in_array;
  *
  * Source: https://github.com/czechphp/national-identification-number-validator
  */
-final class CzeckRepublic extends CountryHandler
+final class CzechRepublic extends CountryHandler
 {
     /**
      * @var string
      */
-    public const COUNTRYCODE = 'CY';
+    public const COUNTRYCODE = 'CZ';
 
     /**
      * @var int

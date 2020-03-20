@@ -6,7 +6,7 @@ namespace spec\loophp\Tin\CountryHandler;
 
 use tests\loophp\Tin\AbstractAlgorithmSpec;
 
-class CzeckRepublicSpec extends AbstractAlgorithmSpec
+class CzechRepublicSpec extends AbstractAlgorithmSpec
 {
     public const INVALID_NUMBER_DATE = ['901549/0006', '902149/0003'];
 

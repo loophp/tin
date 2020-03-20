@@ -10,7 +10,7 @@ use loophp\Tin\CountryHandler\Bulgaria;
 use loophp\Tin\CountryHandler\CountryHandlerInterface;
 use loophp\Tin\CountryHandler\Croatia;
 use loophp\Tin\CountryHandler\Cyprus;
-use loophp\Tin\CountryHandler\CzeckRepublic;
+use loophp\Tin\CountryHandler\CzechRepublic;
 use loophp\Tin\CountryHandler\Denmark;
 use loophp\Tin\CountryHandler\Estonia;
 use loophp\Tin\CountryHandler\Finland;
@@ -48,7 +48,7 @@ final class TIN
         'BE' => Belgium::class,
         'BG' => Bulgaria::class,
         'CY' => Cyprus::class,
-        'CZ' => CzeckRepublic::class,
+        'CZ' => CzechRepublic::class,
         'DE' => Germany::class,
         'DK' => Denmark::class,
         'EE' => Estonia::class,
