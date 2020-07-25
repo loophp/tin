@@ -28,9 +28,9 @@ final class Denmark extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $day = (int) (substr($tin, 0, 2));
-        $month = (int) (substr($tin, 2, 2));
-        $year = (int) (substr($tin, 4, 2));
+        $day = (int) (mb_substr($tin, 0, 2));
+        $month = (int) (mb_substr($tin, 2, 2));
+        $year = (int) (mb_substr($tin, 4, 2));
 
         $d1 = checkdate($month, $day, 1900 + $year);
         $d2 = checkdate($month, $day, 2000 + $year);
@@ -65,17 +65,13 @@ final class Denmark extends CountryHandler
      * 1st of January 1990
      * 1st of January 1991
      * 1st of January 1992
-     *
-     * @param string $tin
-     *
-     * @return bool
      */
     protected function hasValidRule(string $tin): bool
     {
-        $serialNumber = (int) (substr($tin, 6, 4));
-        $dayOfBirth = (int) (substr($tin, 0, 2));
-        $monthOfBirth = (int) (substr($tin, 2, 2));
-        $yearOfBirth = (int) (substr($tin, 4, 2));
+        $serialNumber = (int) (mb_substr($tin, 6, 4));
+        $dayOfBirth = (int) (mb_substr($tin, 0, 2));
+        $monthOfBirth = (int) (mb_substr($tin, 2, 2));
+        $yearOfBirth = (int) (mb_substr($tin, 4, 2));
 
         if (37 <= $yearOfBirth && 57 >= $yearOfBirth && 5000 <= $serialNumber && 8999 >= $serialNumber) {
             return false;

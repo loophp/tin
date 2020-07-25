@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
-use function strlen;
-
 use const STR_PAD_LEFT;
 
 /**
@@ -95,8 +93,8 @@ final class Spain extends CountryHandler
 
     private function isFollowRule1(string $tin): bool
     {
-        $number = (int) (substr($tin, 0, strlen($tin) - 1));
-        $checkDigit = $tin[strlen($tin) - 1];
+        $number = (int) (mb_substr($tin, 0, mb_strlen($tin) - 1));
+        $checkDigit = $tin[mb_strlen($tin) - 1];
         $remainderBy23 = $number % 23;
         $sum = $remainderBy23 + 1;
 
@@ -106,8 +104,8 @@ final class Spain extends CountryHandler
     private function isFollowRule2(string $tin): bool
     {
         $c1 = (string) $this->getNumberFromChar($tin[0]);
-        $number = (int) ($c1 . substr($tin, 1, strlen($tin)));
-        $checkDigit = $tin[strlen($tin) - 1];
+        $number = (int) ($c1 . mb_substr($tin, 1, mb_strlen($tin)));
+        $checkDigit = $tin[mb_strlen($tin) - 1];
         $remainderBy23 = $number % 23;
         $sum = $remainderBy23 + 1;
 

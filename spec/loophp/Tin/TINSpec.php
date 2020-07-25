@@ -65,4 +65,9 @@ class TINSpec extends ObjectBehavior
     {
         $this->shouldHaveType(TIN::class);
     }
+
+    public function let()
+    {
+        $this->beConstructedThrough('fromSlug', ['foo123']);
+    }
 }

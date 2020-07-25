@@ -53,11 +53,6 @@ final class CzechRepublic extends CountryHandler
      */
     private const MONTH_FEMALE = 50;
 
-    /**
-     * @param string $tin
-     *
-     * @return bool
-     */
     protected function hasValidDate(string $tin): bool
     {
         // If we reach this point, it means that it's already validated.
@@ -130,7 +125,7 @@ final class CzechRepublic extends CountryHandler
 
         // number's modulo should be 0
         if (true === $hasModulo) {
-            $number = (int) $matches['year'] . $matches['month'] . $matches['day'] . $matches['sequence'];
+            $number = (int) ($matches['year'] . $matches['month'] . $matches['day'] . $matches['sequence']);
             $modulo = $number % self::MODULO;
 
             // from year 1954 to 1985 and sometimes even after that, modulo can be 10 which results in 0 as modulo

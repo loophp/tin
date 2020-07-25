@@ -31,7 +31,7 @@ final class Slovenia extends CountryHandler
 
     private function isFollowRangeRule(string $tin): bool
     {
-        $intTIN = (int) (substr($tin, 0, 7));
+        $intTIN = (int) (mb_substr($tin, 0, 7));
 
         return 999999 < $intTIN && 10000000 > $intTIN;
     }

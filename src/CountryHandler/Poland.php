@@ -36,9 +36,9 @@ final class Poland extends CountryHandler
 
     protected function hasValidDateWhenPattern2(string $tin): bool
     {
-        $year = (int) (substr($tin, 0, 2));
-        $month = (int) (substr($tin, 2, 2));
-        $day = (int) (substr($tin, 4, 2));
+        $year = (int) (mb_substr($tin, 0, 2));
+        $month = (int) (mb_substr($tin, 2, 2));
+        $day = (int) (mb_substr($tin, 4, 2));
 
         if (1 <= $month && 12 >= $month) {
             return checkdate($month, $day, 1900 + $year);

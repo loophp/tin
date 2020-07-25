@@ -3,6 +3,7 @@
  [![Total Downloads](https://img.shields.io/packagist/dt/loophp/tin.svg?style=flat-square)](https://packagist.org/packages/loophp/tin)
  [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/loophp/tin/Continuous%20Integration?style=flat-square)](https://github.com/loophp/tin/actions)
  [![Scrutinizer code quality](https://img.shields.io/scrutinizer/quality/g/loophp/tin/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/loophp/tin/?branch=master)
+ [![Type Coverage](https://shepherd.dev/github/loophp/tin/coverage.svg)](https://shepherd.dev/github/loophp/tin)
  [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/loophp/tin/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/loophp/tin/?branch=master)
  [![Mutation testing badge](https://badge.stryker-mutator.io/github.com/loophp/tin/master)](https://stryker-mutator.github.io)
  [![License](https://img.shields.io/packagist/l/loophp/tin.svg?style=flat-square)](https://packagist.org/packages/loophp/tin)

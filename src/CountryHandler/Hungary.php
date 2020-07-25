@@ -30,7 +30,7 @@ final class Hungary extends CountryHandler
         $sum = 0;
 
         for ($i = 0; 9 > $i; ++$i) {
-            $c11 = (int) (substr($tin, $i, 1));
+            $c11 = (int) (mb_substr($tin, $i, 1));
             $sum += $c11 * ($i + 1);
         }
         $remainderBy11 = $sum % 11;

@@ -24,11 +24,6 @@ final class Belgium extends CountryHandler
      */
     public const PATTERN = '\\d{2}[0-1]\\d[0-3]\\d{6}';
 
-    /**
-     * @param string $tin
-     *
-     * @return bool
-     */
     protected function hasValidDate(string $tin): bool
     {
         return 0 !== $this->getDateType($tin);
@@ -41,14 +36,14 @@ final class Belgium extends CountryHandler
 
     private function getDateType(string $tin): int
     {
-        $year = (int) (substr($tin, 0, 2));
-        $month = (int) (substr($tin, 2, 2));
-        $day = (int) (substr($tin, 4, 2));
+        $year = (int) (mb_substr($tin, 0, 2));
+        $month = (int) (mb_substr($tin, 2, 2));
+        $day = (int) (mb_substr($tin, 4, 2));
 
         $y1 = checkdate($month, $day, 1900 + $year);
         $y2 = checkdate($month, $day, 2000 + $year);
 
-        if (0 === $day || 0 === $month || $y1 && $y2) {
+        if (0 === $day || 0 === $month || ($y1 && $y2)) {
             return 3;
         }
 
@@ -65,9 +60,9 @@ final class Belgium extends CountryHandler
 
     private function isFollowBelgiumRule1(string $tin): bool
     {
-        $divisionRemainderBy97 = (int) (substr($tin, 0, 9)) % 97;
+        $divisionRemainderBy97 = (int) (mb_substr($tin, 0, 9)) % 97;
 
-        return 97 - $divisionRemainderBy97 === (int) (substr($tin, 9, 3));
+        return 97 - $divisionRemainderBy97 === (int) (mb_substr($tin, 9, 3));
     }
 
     private function isFollowBelgiumRule1AndIsDateValid(string $tin): bool
@@ -79,9 +74,9 @@ final class Belgium extends CountryHandler
 
     private function isFollowBelgiumRule2(string $tin): bool
     {
-        $divisionRemainderBy97 = (2 + (int) substr($tin, 0, 9)) % 97;
+        $divisionRemainderBy97 = (2 + (int) mb_substr($tin, 0, 9)) % 97;
 
-        return 97 - $divisionRemainderBy97 === (int) (substr($tin, 9, 3));
+        return 97 - $divisionRemainderBy97 === (int) (mb_substr($tin, 9, 3));
     }
 
     private function isFollowBelgiumRule2AndIsDateValid(string $tin): bool

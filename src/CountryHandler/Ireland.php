@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
-use function strlen;
-
 /**
  * Ireland.
  */
@@ -59,7 +57,7 @@ final class Ireland extends CountryHandler
         $c5 = $this->digitAt($tin, 4);
         $c6 = $this->digitAt($tin, 5);
         $c7 = $this->digitAt($tin, 6);
-        $c9 = (9 <= strlen($tin)) ? $this->letterToNumber($tin[8]) : 0;
+        $c9 = (9 <= mb_strlen($tin)) ? $this->letterToNumber($tin[8]) : 0;
         $c8 = $tin[7];
         $sum = $c9 * 9 + $c1 * 8 + $c2 * 7 + $c3 * 6 + $c4 * 5 + $c5 * 4 + $c6 * 3 + $c7 * 2;
         $remainderBy23 = $sum % 23;

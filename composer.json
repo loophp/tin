@@ -15,14 +15,16 @@
         }
     ],
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "symfony/polyfill-mbstring": "^1.18"
     },
     "require-dev": {
-        "drupol/php-conventions": "^1.6",
+        "drupol/php-conventions": "^1.7.2 || ^1.8.6",
         "friends-of-phpspec/phpspec-code-coverage": "^4.3",
         "infection/infection": "^0.13.6 || ^0.15.3",
-        "phpspec/phpspec": "^5.1.2 || ^6.1.1",
-        "phpstan/phpstan-strict-rules": "^0.12.2"
+        "phpspec/phpspec": "^5.1.2 || ^6.2.1",
+        "phpstan/phpstan-strict-rules": "^0.12.2",
+        "vimeo/psalm": "^3.12"
     },
     "autoload": {
         "psr-4": {

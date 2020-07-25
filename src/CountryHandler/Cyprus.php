@@ -52,11 +52,6 @@ final class Cyprus extends CountryHandler
         return $remainderBy26 + 65 === $c9;
     }
 
-    /**
-     * @param int $x
-     *
-     * @return int
-     */
     private function recodeValue(int $x): int
     {
         switch ($x) {

@@ -58,9 +58,9 @@ final class Luxembourg extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $year = (int) (substr($tin, 0, 4));
-        $month = (int) (substr($tin, 4, 2));
-        $day = (int) (substr($tin, 6, 2));
+        $year = (int) (mb_substr($tin, 0, 4));
+        $month = (int) (mb_substr($tin, 4, 2));
+        $day = (int) (mb_substr($tin, 6, 2));
 
         return checkdate($month, $day, $year);
     }

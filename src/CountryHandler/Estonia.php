@@ -26,9 +26,9 @@ final class Estonia extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $year = (int) (substr($tin, 1, 2));
-        $month = (int) (substr($tin, 3, 2));
-        $day = (int) (substr($tin, 5, 2));
+        $year = (int) (mb_substr($tin, 1, 2));
+        $month = (int) (mb_substr($tin, 3, 2));
+        $day = (int) (mb_substr($tin, 5, 2));
 
         $d1 = checkdate($month, $day, 1900 + $year);
         $d2 = checkdate($month, $day, 2000 + $year);
@@ -38,7 +38,7 @@ final class Estonia extends CountryHandler
 
     protected function hasValidRule(string $tin): bool
     {
-        $range = (int) (substr($tin, 7, 3));
+        $range = (int) (mb_substr($tin, 7, 3));
 
         if (false === (0 < $range && 711 > $range)) {
             return false;

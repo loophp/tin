@@ -19,21 +19,16 @@ final class Latvia extends CountryHandler
      */
     public const LENGTH = 11;
 
-    /**
-     * @param string $tin
-     *
-     * @return bool
-     */
     protected function hasValidDate(string $tin): bool
     {
-        $c1c2 = substr($tin, 0, 2);
+        $c1c2 = mb_substr($tin, 0, 2);
 
         if ('32' === $c1c2) {
             return true;
         }
         $day = (int) $c1c2;
-        $month = (int) (substr($tin, 2, 2));
-        $year = (int) (substr($tin, 4, 2));
+        $month = (int) (mb_substr($tin, 2, 2));
+        $year = (int) (mb_substr($tin, 4, 2));
 
         $y1 = checkdate($month, $day, 1900 + $year);
         $y2 = checkdate($month, $day, 2000 + $year);

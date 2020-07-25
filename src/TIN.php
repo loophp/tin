@@ -79,10 +79,13 @@ final class TIN
      */
     private $slug;
 
+    private function __construct(string $slug)
+    {
+        $this->slug = $slug;
+    }
+
     /**
      * @throws TINException
-     *
-     * @return bool
      */
     public function check(): bool
     {
@@ -91,34 +94,16 @@ final class TIN
         return $this->getAlgorithm($parsedTin['country'], $parsedTin['tin'])->validate();
     }
 
-    /**
-     * @param string $countryCode
-     * @param string $tin
-     *
-     * @return TIN
-     */
     public static function from(string $countryCode, string $tin): TIN
     {
         return self::fromSlug($countryCode . $tin);
     }
 
-    /**
-     * @param string $slug
-     *
-     * @return TIN
-     */
     public static function fromSlug(string $slug): TIN
     {
-        $instance = new self();
-
-        $instance->slug = $slug;
-
-        return $instance;
+        return new self($slug);
     }
 
-    /**
-     * @return bool
-     */
     public function isValid(): bool
     {
         try {
@@ -131,18 +116,17 @@ final class TIN
     }
 
     /**
-     * @param string $country
-     * @param string|null $tin
-     *
      * @throws TINException
-     *
-     * @return CountryHandlerInterface
      */
     private function getAlgorithm(string $country, ?string $tin = null): CountryHandlerInterface
     {
         foreach ($this->algorithms as $algorithm) {
             if (true === $algorithm::supports($country)) {
-                return new $algorithm($tin);
+                $handler = new $algorithm($tin);
+
+                if ($handler instanceof CountryHandlerInterface) {
+                    return $handler;
+                }
             }
         }
 
@@ -150,8 +134,6 @@ final class TIN
     }
 
     /**
-     * @param string $slug
-     *
      * @throws TINException
      *
      * @return array<array-key, string>

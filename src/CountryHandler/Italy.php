@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace loophp\Tin\CountryHandler;
 
 use function in_array;
-use function strlen;
 
 use const FILE_IGNORE_NEW_LINES;
 
@@ -45,10 +44,10 @@ final class Italy extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $day = (int) ($this->convertCharToNumber(substr($tin, 9, 2)));
+        $day = (int) ($this->convertCharToNumber(mb_substr($tin, 9, 2)));
         $c9 = $tin[8];
         $month = $this->getMonthNumber($c9);
-        $year = (int) ($this->convertCharToNumber(substr($tin, 6, 2)));
+        $year = (int) ($this->convertCharToNumber(mb_substr($tin, 6, 2)));
 
         if (1 <= $day && 31 >= $day) {
             $d1 = checkdate($month, $day, 1900 + $year);
@@ -69,10 +68,10 @@ final class Italy extends CountryHandler
             $this->listSet = $listSet;
         }
 
-        $code = substr($tin, 11, 1) . $this->convertCharToNumber(substr($tin, 12, 3));
+        $code = mb_substr($tin, 11, 1) . $this->convertCharToNumber(mb_substr($tin, 12, 3));
 
         $containsUpper = in_array($code, $this->listSet, true);
-        $containsLower = in_array(strtolower($code), $this->listSet, true);
+        $containsLower = in_array(mb_strtolower($code), $this->listSet, true);
 
         return ($containsUpper || $containsLower) && parent::hasValidPattern($tin);
     }
@@ -97,7 +96,7 @@ final class Italy extends CountryHandler
     {
         $newStr = '';
 
-        for ($i = 0; strlen($oldStr) > $i; ++$i) {
+        for ($i = 0; mb_strlen($oldStr) > $i; ++$i) {
             $newStr .= $this->getNumberFromChar($oldStr[$i]);
         }
 

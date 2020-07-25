@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
-use function strlen;
-
 /**
  * Germany.
  */
@@ -54,10 +52,10 @@ final class Germany extends CountryHandler
 
     private function calculateCheckDigit(string $tin): int
     {
-        $chars = (array) str_split($tin);
+        $chars = (array) mb_str_split($tin);
         $remainder_mod_eleven = 10;
 
-        for ($length = strlen($tin), $counter = 0; $length - 1 > $counter; ++$counter) {
+        for ($length = mb_strlen($tin), $counter = 0; $length - 1 > $counter; ++$counter) {
             $digit = (int) ($chars[$counter]);
             $remainder_mod_ten = ($digit + $remainder_mod_eleven) % 10;
 
@@ -93,7 +91,13 @@ final class Germany extends CountryHandler
             return false;
         }
 
+        /**
+         * @var array<int, int>
+         */
         $tab = [];
+        /**
+         * @var array<int, int>
+         */
         $pos = [];
 
         for ($i = 0; 10 > $i; ++$i) {
@@ -132,7 +136,14 @@ final class Germany extends CountryHandler
             return false;
         }
 
+        /**
+         * @var array<int, int>
+         */
         $tab = [];
+
+        /**
+         * @var array<int, int>
+         */
         $pos = [];
 
         for ($i = 0; 10 > $i; ++$i) {

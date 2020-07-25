@@ -26,10 +26,10 @@ final class Finland extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $day = (int) (substr($tin, 0, 2));
-        $month = (int) (substr($tin, 2, 2));
-        $year = (int) (substr($tin, 4, 2));
-        $c7 = substr($tin, 6, 1);
+        $day = (int) (mb_substr($tin, 0, 2));
+        $month = (int) (mb_substr($tin, 2, 2));
+        $year = (int) (mb_substr($tin, 4, 2));
+        $c7 = mb_substr($tin, 6, 1);
 
         if ('+' === $c7) {
             return checkdate($month, $day, 1800 + $year);
@@ -44,7 +44,7 @@ final class Finland extends CountryHandler
 
     protected function hasValidRule(string $tin): bool
     {
-        $number = (int) (substr($tin, 0, 6) . substr($tin, 7, 3));
+        $number = (int) (mb_substr($tin, 0, 6) . mb_substr($tin, 7, 3));
         $remainderBy31 = $number % 31;
         $c11 = $tin[10];
 

@@ -6,8 +6,6 @@ namespace loophp\Tin\CountryHandler;
 
 use loophp\Tin\Exception\TINException;
 
-use function strlen;
-
 /**
  * Base handler class.
  */
@@ -20,21 +18,16 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     /**
      * CountryHandler constructor.
-     *
-     * @param string $tin
      */
     final public function __construct(string $tin = '')
     {
         $this->tin = $tin;
     }
 
-    /**
-     * @return string
-     */
     public function getTIN(): string
     {
         if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $this->tin)) {
-            return strtoupper($string);
+            return mb_strtoupper($string);
         }
 
         return '';
@@ -45,7 +38,7 @@ abstract class CountryHandler implements CountryHandlerInterface
      */
     final public static function supports(string $country): bool
     {
-        return strtoupper($country) === strtoupper(static::COUNTRYCODE);
+        return mb_strtoupper($country) === mb_strtoupper(static::COUNTRYCODE);
     }
 
     final public function validate(): bool
@@ -74,8 +67,6 @@ abstract class CountryHandler implements CountryHandlerInterface
     /**
      * @param string $tin
      *   The TIN.
-     *
-     * @return CountryHandlerInterface
      */
     final public function withTIN(string $tin): CountryHandlerInterface
     {
@@ -87,26 +78,16 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     /**
      * Get digit at a given position.
-     *
-     * @param string $str
-     * @param int $index
-     *
-     * @return int
      */
     protected function digitAt(string $str, int $index): int
     {
-        return (int) $str[$index] ?? 0;
+        return (int) ($str[$index] ?? 0);
     }
 
-    /**
-     * @param int $int
-     *
-     * @return int
-     */
     protected function digitsSum(int $int): int
     {
         return array_reduce(
-            (array) str_split((string) $int),
+            (array) mb_str_split((string) $int),
             static function (int $carry, string $digit): int {
                 return $carry + (int) $digit;
             },
@@ -118,26 +99,17 @@ abstract class CountryHandler implements CountryHandlerInterface
      * Get the alphabetical position.
      *
      * eg: A = 1
-     *
-     * @param string $character
-     *
-     * @return int
      */
     protected function getAlphabeticalPosition(string $character): int
     {
         return false !== ($return = array_combine(range('a', 'z'), range(1, 26))) ?
-            $return[strtolower($character)] :
+            $return[mb_strtolower($character)] :
             0;
     }
 
-    /**
-     * @param int $number
-     *
-     * @return int
-     */
     protected function getLastDigit(int $number): int
     {
-        $split = (array) str_split((string) $number);
+        $split = (array) mb_str_split((string) $number);
 
         return (int) end($split);
     }
@@ -149,21 +121,12 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     /**
      * Match length.
-     *
-     * @param string $tin
-     *
-     * @return bool
      */
     protected function hasValidLength(string $tin): bool
     {
         return $this->matchLength($this->getTIN(), static::LENGTH);
     }
 
-    /**
-     * @param string $tin
-     *
-     * @return bool
-     */
     protected function hasValidPattern(string $tin): bool
     {
         return $this->matchPattern($this->getTIN(), static::PATTERN);
@@ -174,23 +137,11 @@ abstract class CountryHandler implements CountryHandlerInterface
         return true;
     }
 
-    /**
-     * @param string $tin
-     * @param int $length
-     *
-     * @return bool
-     */
     protected function matchLength(string $tin, int $length): bool
     {
-        return strlen($tin) === $length;
+        return mb_strlen($tin) === $length;
     }
 
-    /**
-     * @param string $subject
-     * @param string $pattern
-     *
-     * @return bool
-     */
     protected function matchPattern(string $subject, string $pattern): bool
     {
         return 1 === preg_match(sprintf('/%s/', $pattern), $subject);

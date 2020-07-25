@@ -41,15 +41,8 @@ interface CountryHandlerInterface
      * Validate a tin number.
      *
      * @throws TINException
-     *
-     * @return bool
      */
     public function validate(): bool;
 
-    /**
-     * @param string $tin
-     *
-     * @return CountryHandlerInterface
-     */
     public function withTIN(string $tin): CountryHandlerInterface;
 }

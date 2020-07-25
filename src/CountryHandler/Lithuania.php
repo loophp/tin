@@ -27,10 +27,10 @@ final class Lithuania extends CountryHandler
     protected function hasValidRule(string $tin): bool
     {
         $sum = 0;
-        $c11 = (int) (substr($tin, 10));
+        $c11 = (int) (mb_substr($tin, 10));
 
         for ($i = 0; 10 > $i; ++$i) {
-            $sum += $this->multiplyAccordingToWeight((int) (substr($tin, $i, 1)), $i);
+            $sum += $this->multiplyAccordingToWeight((int) (mb_substr($tin, $i, 1)), $i);
         }
         $remainderBy11 = $sum % 11;
 
@@ -40,7 +40,7 @@ final class Lithuania extends CountryHandler
         $sum2 = 0;
 
         for ($j = 0; 10 > $j; ++$j) {
-            $sum2 += $this->multiplyAccordingToWeight2((int) (substr($tin, $j, 1)), $j);
+            $sum2 += $this->multiplyAccordingToWeight2((int) (mb_substr($tin, $j, 1)), $j);
         }
         $remainderBy11 = $sum2 % 11;
 

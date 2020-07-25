@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
-use function strlen;
-
 /**
  * Sweden.
  */
@@ -61,44 +59,44 @@ final class Sweden extends CountryHandler
 
     protected function hasValidRule(string $tin): bool
     {
-        return ((int) '10' === strlen($tin)
+        return ((int) '10' === mb_strlen($tin)
             && $this->isFollowSwedenRule1And2($tin))
-            || ((int) '12' === strlen($tin)
+            || ((int) '12' === mb_strlen($tin)
                 && $this->isFollowSwedenRule3And4($tin));
     }
 
     private function hasValidDate1(string $tin): bool
     {
-        $year = (int) (substr($tin, 0, 2));
-        $month = (int) (substr($tin, 2, 2));
-        $day = (int) (substr($tin, 4, 2));
+        $year = (int) (mb_substr($tin, 0, 2));
+        $month = (int) (mb_substr($tin, 2, 2));
+        $day = (int) (mb_substr($tin, 4, 2));
 
         return checkdate($month, $day, 1900 + $year) || checkdate($month, $day, 2000 + $year);
     }
 
     private function hasValidDate2(string $tin): bool
     {
-        $year = (int) (substr($tin, 0, 2));
-        $month = (int) (substr($tin, 2, 2));
-        $day = (int) (substr($tin, 4, 2));
+        $year = (int) (mb_substr($tin, 0, 2));
+        $month = (int) (mb_substr($tin, 2, 2));
+        $day = (int) (mb_substr($tin, 4, 2));
 
         return checkdate($month, $day - 60, 1900 + $year) || checkdate($month, $day - 60, 2000 + $year);
     }
 
     private function hasValidDate3(string $tin): bool
     {
-        $year = (int) (substr($tin, 0, 4));
-        $month = (int) (substr($tin, 4, 2));
-        $day = (int) (substr($tin, 6, 2));
+        $year = (int) (mb_substr($tin, 0, 4));
+        $month = (int) (mb_substr($tin, 4, 2));
+        $day = (int) (mb_substr($tin, 6, 2));
 
         return checkdate($month, $day, $year);
     }
 
     private function hasValidDate4(string $tin): bool
     {
-        $year = (int) (substr($tin, 0, 4));
-        $month = (int) (substr($tin, 4, 2));
-        $day = (int) (substr($tin, 6, 2));
+        $year = (int) (mb_substr($tin, 0, 4));
+        $month = (int) (mb_substr($tin, 4, 2));
+        $day = (int) (mb_substr($tin, 6, 2));
 
         return checkdate($month, $day - 60, $year);
     }
