@@ -64,7 +64,7 @@ jobs:
 
             - name: Infection score report
               run: |
-                  vendor/bin/infection run -j 2
+                  vendor/bin/infection run -j 10
               continue-on-error: true
 
             - name: PHP Insights report
