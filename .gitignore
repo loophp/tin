@@ -5,5 +5,4 @@
 /example/
 /.idea/
 /test.php
-/phpspec.yml
-/infection.json
+
