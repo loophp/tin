@@ -74,7 +74,7 @@ final class Belgium extends CountryHandler
 
     private function isFollowBelgiumRule2(string $tin): bool
     {
-        $divisionRemainderBy97 = (2 + (int) mb_substr($tin, 0, 9)) % 97;
+        $divisionRemainderBy97 = (int) ('2' . mb_substr($tin, 0, 9)) % 97;
 
         return 97 - $divisionRemainderBy97 === (int) (mb_substr($tin, 9, 3));
     }
