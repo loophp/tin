@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -21,9 +26,9 @@ final class Romania extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $year = (int) (mb_substr($tin, 1, 2));
-        $month = (int) (mb_substr($tin, 3, 2));
-        $day = (int) (mb_substr($tin, 5, 2));
+        $year = (int) (substr($tin, 1, 2));
+        $month = (int) (substr($tin, 3, 2));
+        $day = (int) (substr($tin, 5, 2));
 
         $y1 = checkdate($month, $day, 1900 + $year);
         $y2 = checkdate($month, $day, 2000 + $year);
@@ -39,7 +44,7 @@ final class Romania extends CountryHandler
             return false;
         }
 
-        $county = (int) (mb_substr($tin, 7, 2));
+        $county = (int) (substr($tin, 7, 2));
 
         if (47 < $county && 51 !== $county && 52 !== $county) {
             return false;

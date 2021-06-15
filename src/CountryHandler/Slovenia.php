@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -31,7 +36,7 @@ final class Slovenia extends CountryHandler
 
     private function isFollowRangeRule(string $tin): bool
     {
-        $intTIN = (int) (mb_substr($tin, 0, 7));
+        $intTIN = (int) (substr($tin, 0, 7));
 
         return 999999 < $intTIN && 10000000 > $intTIN;
     }

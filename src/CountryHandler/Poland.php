@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -36,9 +41,9 @@ final class Poland extends CountryHandler
 
     protected function hasValidDateWhenPattern2(string $tin): bool
     {
-        $year = (int) (mb_substr($tin, 0, 2));
-        $month = (int) (mb_substr($tin, 2, 2));
-        $day = (int) (mb_substr($tin, 4, 2));
+        $year = (int) (substr($tin, 0, 2));
+        $month = (int) (substr($tin, 2, 2));
+        $day = (int) (substr($tin, 4, 2));
 
         if (1 <= $month && 12 >= $month) {
             return checkdate($month, $day, 1900 + $year);
@@ -71,8 +76,8 @@ final class Poland extends CountryHandler
 
     protected function hasValidRule(string $tin): bool
     {
-        return ($this->isFollowLength1($tin) && $this->isFollowRulePoland1($tin)) ||
-            ($this->isFollowLength2($tin) && $this->isFollowRulePoland2($tin));
+        return ($this->isFollowLength1($tin) && $this->isFollowRulePoland1($tin))
+            || ($this->isFollowLength2($tin) && $this->isFollowRulePoland2($tin));
     }
 
     private function isFollowLength1(string $tin): bool

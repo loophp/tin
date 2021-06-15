@@ -1,10 +1,16 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
 use function in_array;
+use function strlen;
 
 use const FILE_IGNORE_NEW_LINES;
 
@@ -44,10 +50,10 @@ final class Italy extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $day = (int) ($this->convertCharToNumber(mb_substr($tin, 9, 2)));
+        $day = (int) ($this->convertCharToNumber(substr($tin, 9, 2)));
         $c9 = $tin[8];
         $month = $this->getMonthNumber($c9);
-        $year = (int) ($this->convertCharToNumber(mb_substr($tin, 6, 2)));
+        $year = (int) ($this->convertCharToNumber(substr($tin, 6, 2)));
 
         if (1 <= $day && 31 >= $day) {
             $d1 = checkdate($month, $day, 1900 + $year);
@@ -68,10 +74,10 @@ final class Italy extends CountryHandler
             $this->listSet = $listSet;
         }
 
-        $code = mb_substr($tin, 11, 1) . $this->convertCharToNumber(mb_substr($tin, 12, 3));
+        $code = substr($tin, 11, 1) . $this->convertCharToNumber(substr($tin, 12, 3));
 
         $containsUpper = in_array($code, $this->listSet, true);
-        $containsLower = in_array(mb_strtolower($code), $this->listSet, true);
+        $containsLower = in_array(strtolower($code), $this->listSet, true);
 
         return ($containsUpper || $containsLower) && parent::hasValidPattern($tin);
     }
@@ -96,7 +102,7 @@ final class Italy extends CountryHandler
     {
         $newStr = '';
 
-        for ($i = 0; mb_strlen($oldStr) > $i; ++$i) {
+        for ($i = 0; strlen($oldStr) > $i; ++$i) {
             $newStr .= $this->getNumberFromChar($oldStr[$i]);
         }
 
@@ -120,63 +126,88 @@ final class Italy extends CountryHandler
             case '0':
             case 'A':
                 return 1;
+
             case '1':
             case 'B':
                 return 0;
+
             case '2':
             case 'C':
                 return 5;
+
             case '3':
             case 'D':
                 return 7;
+
             case '4':
             case 'E':
                 return 9;
+
             case '5':
             case 'F':
                 return 13;
+
             case '6':
             case 'G':
                 return 15;
+
             case '7':
             case 'H':
                 return 17;
+
             case '8':
             case 'I':
                 return 19;
+
             case '9':
             case 'J':
                 return 21;
+
             case 'K':
                 return 2;
+
             case 'L':
                 return 4;
+
             case 'M':
                 return 18;
+
             case 'N':
                 return 20;
+
             case 'O':
                 return 11;
+
             case 'P':
                 return 3;
+
             case 'Q':
                 return 6;
+
             case 'R':
                 return 8;
+
             case 'S':
                 return 12;
+
             case 'T':
                 return 14;
+
             case 'U':
                 return 16;
+
             case 'V':
                 return 10;
+
             case 'W':
                 return 22;
+
             case 'X':
                 return 25;
+
             case 'Y':
                 return 24;
+
             case 'Z':
                 return 23;
 
@@ -190,26 +221,37 @@ final class Italy extends CountryHandler
         switch ($m) {
             case 'A':
                 return 1;
+
             case 'B':
                 return 2;
+
             case 'C':
                 return 3;
+
             case 'D':
                 return 4;
+
             case 'E':
                 return 5;
+
             case 'H':
                 return 6;
+
             case 'L':
                 return 7;
+
             case 'M':
                 return 8;
+
             case 'P':
                 return 9;
+
             case 'R':
                 return 10;
+
             case 'S':
                 return 11;
+
             case 'T':
                 return 12;
 
@@ -227,22 +269,31 @@ final class Italy extends CountryHandler
         switch ($m) {
             case 'L':
                 return 0;
+
             case 'M':
                 return 1;
+
             case 'N':
                 return 2;
+
             case 'P':
                 return 3;
+
             case 'Q':
                 return 4;
+
             case 'R':
                 return 5;
+
             case 'S':
                 return 6;
+
             case 'T':
                 return 7;
+
             case 'U':
                 return 8;
+
             case 'V':
                 return 9;
 

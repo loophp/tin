@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -57,20 +62,28 @@ final class Cyprus extends CountryHandler
         switch ($x) {
             case 1:
                 return 0;
+
             case 2:
                 return 5;
+
             case 3:
                 return 7;
+
             case 4:
                 return 9;
+
             case 5:
                 return 13;
+
             case 6:
                 return 15;
+
             case 7:
                 return 17;
+
             case 8:
                 return 19;
+
             case 9:
                 return 21;
         }

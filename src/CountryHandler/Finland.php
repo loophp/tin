@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -26,10 +31,10 @@ final class Finland extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $day = (int) (mb_substr($tin, 0, 2));
-        $month = (int) (mb_substr($tin, 2, 2));
-        $year = (int) (mb_substr($tin, 4, 2));
-        $c7 = mb_substr($tin, 6, 1);
+        $day = (int) (substr($tin, 0, 2));
+        $month = (int) (substr($tin, 2, 2));
+        $year = (int) (substr($tin, 4, 2));
+        $c7 = substr($tin, 6, 1);
 
         if ('+' === $c7) {
             return checkdate($month, $day, 1800 + $year);
@@ -44,7 +49,7 @@ final class Finland extends CountryHandler
 
     protected function hasValidRule(string $tin): bool
     {
-        $number = (int) (mb_substr($tin, 0, 6) . mb_substr($tin, 7, 3));
+        $number = (int) (substr($tin, 0, 6) . substr($tin, 7, 3));
         $remainderBy31 = $number % 31;
         $c11 = $tin[10];
 
@@ -60,44 +65,64 @@ final class Finland extends CountryHandler
         switch ($number) {
             case 10:
                 return 'A';
+
             case 11:
                 return 'B';
+
             case 12:
                 return 'C';
+
             case 13:
                 return 'D';
+
             case 14:
                 return 'E';
+
             case 15:
                 return 'F';
+
             case 16:
                 return 'H';
+
             case 17:
                 return 'J';
+
             case 18:
                 return 'K';
+
             case 19:
                 return 'L';
+
             case 20:
                 return 'M';
+
             case 21:
                 return 'N';
+
             case 22:
                 return 'P';
+
             case 23:
                 return 'R';
+
             case 24:
                 return 'S';
+
             case 25:
                 return 'T';
+
             case 26:
                 return 'U';
+
             case 27:
                 return 'V';
+
             case 28:
                 return 'W';
+
             case 29:
                 return 'X';
+
             case 30:
                 return 'Y';
 

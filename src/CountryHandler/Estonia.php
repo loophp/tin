@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -26,9 +31,9 @@ final class Estonia extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $year = (int) (mb_substr($tin, 1, 2));
-        $month = (int) (mb_substr($tin, 3, 2));
-        $day = (int) (mb_substr($tin, 5, 2));
+        $year = (int) (substr($tin, 1, 2));
+        $month = (int) (substr($tin, 3, 2));
+        $day = (int) (substr($tin, 5, 2));
 
         $d1 = checkdate($month, $day, 1900 + $year);
         $d2 = checkdate($month, $day, 2000 + $year);
@@ -38,7 +43,7 @@ final class Estonia extends CountryHandler
 
     protected function hasValidRule(string $tin): bool
     {
-        $range = (int) (mb_substr($tin, 7, 3));
+        $range = (int) (substr($tin, 7, 3));
 
         if (false === (0 < $range && 711 > $range)) {
             return false;
@@ -58,8 +63,8 @@ final class Estonia extends CountryHandler
         $sum = $c1 + $c2 * 2 + $c3 * 3 + $c4 * 4 + $c5 * 5 + $c6 * 6 + $c7 * 7 + $c8 * 8 + $c9 * 9 + $c10;
         $remainderBy11 = $sum % 11;
 
-        return (10 > $remainderBy11 && $remainderBy11 === $c11) ||
-            (10 === $remainderBy11 && $this->isFollowEstoniaRulePart2($tin));
+        return (10 > $remainderBy11 && $remainderBy11 === $c11)
+            || (10 === $remainderBy11 && $this->isFollowEstoniaRulePart2($tin));
     }
 
     private function isFollowEstoniaRulePart2(string $tin): bool

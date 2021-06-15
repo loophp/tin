@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace tests\loophp\Tin;
@@ -35,12 +40,12 @@ abstract class AbstractAlgorithmSpec extends ObjectBehavior
         foreach ($numbers as $number) {
             $this
                 ->withTIN(mb_strtoupper($number))
-                ->shouldThrow(new TINException('Invalid date.'))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid date.', strtoupper($number))))
                 ->during('validate');
 
             $this
                 ->withTIN(mb_strtolower($number))
-                ->shouldThrow(new TINException('Invalid date.'))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid date.', mb_strtolower($number))))
                 ->during('validate');
         }
     }
@@ -56,12 +61,12 @@ abstract class AbstractAlgorithmSpec extends ObjectBehavior
         foreach ($numbers as $number) {
             $this
                 ->withTIN(mb_strtoupper($number))
-                ->shouldThrow(new TINException('Invalid length.'))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid length.', strtoupper($number))))
                 ->during('validate');
 
             $this
                 ->withTIN(mb_strtolower($number))
-                ->shouldThrow(new TINException('Invalid length.'))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid length.', strtolower($number))))
                 ->during('validate');
         }
     }
@@ -77,12 +82,12 @@ abstract class AbstractAlgorithmSpec extends ObjectBehavior
         foreach ($numbers as $number) {
             $this
                 ->withTIN(mb_strtoupper($number))
-                ->shouldThrow(new TINException('Invalid syntax.'))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid syntax.', strtoupper($number))))
                 ->during('validate');
 
             $this
                 ->withTIN(mb_strtolower($number))
-                ->shouldThrow(new TINException('Invalid syntax.'))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid syntax.', strtolower($number))))
                 ->during('validate');
         }
     }
@@ -97,13 +102,13 @@ abstract class AbstractAlgorithmSpec extends ObjectBehavior
 
         foreach ($numbers as $number) {
             $this
-                ->withTIN(mb_strtoupper($number))
-                ->shouldThrow(new TINException('Invalid pattern.'))
+                ->withTIN(strtoupper($number))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid pattern.', strtoupper($number))))
                 ->during('validate');
 
             $this
-                ->withTIN(mb_strtolower($number))
-                ->shouldThrow(new TINException('Invalid pattern.'))
+                ->withTIN(strtolower($number))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid pattern.', strtolower($number))))
                 ->during('validate');
         }
     }
@@ -119,12 +124,12 @@ abstract class AbstractAlgorithmSpec extends ObjectBehavior
         foreach ($numbers as $number) {
             $this
                 ->withTIN(mb_strtoupper($number))
-                ->shouldThrow(new TINException('Invalid syntax.'))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid syntax.', $number)))
                 ->during('validate');
 
             $this
                 ->withTIN(mb_strtolower($number))
-                ->shouldThrow(new TINException('Invalid syntax.'))
+                ->shouldThrow(new TINException(sprintf('Invalid TIN(%s). Reason: Invalid syntax.', strtolower($number))))
                 ->during('validate');
         }
     }
@@ -146,12 +151,11 @@ abstract class AbstractAlgorithmSpec extends ObjectBehavior
 
         foreach ($numbers as $number) {
             $this
-                ->withTIN(mb_strtolower($number))
+                ->withTIN(strtolower($number))
                 ->validate($number)
                 ->shouldReturn(true);
-
             $this
-                ->withTIN(mb_strtoupper($number))
+                ->withTIN(strtoupper($number))
                 ->validate($number)
                 ->shouldReturn(true);
         }

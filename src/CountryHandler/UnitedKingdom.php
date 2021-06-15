@@ -1,8 +1,15 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
+
+use function strlen;
 
 /**
  * United Kingdom.
@@ -38,7 +45,7 @@ final class UnitedKingdom extends CountryHandler
     {
         $tin = parent::getTIN();
 
-        if (8 === mb_strlen($tin)) {
+        if (8 === strlen($tin)) {
             $tin .= ' ';
         }
 
@@ -81,7 +88,7 @@ final class UnitedKingdom extends CountryHandler
 
     private function isFollowStructureSubRule2(string $tin): bool
     {
-        $c1c2 = mb_substr($tin, 0, 2);
+        $c1c2 = substr($tin, 0, 2);
 
         return 'GB' !== $c1c2 && 'NK' !== $c1c2 && 'TN' !== $c1c2 && 'ZZ' !== $c1c2;
     }
