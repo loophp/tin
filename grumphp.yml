@@ -1,9 +1,10 @@
 imports:
-  - { resource: vendor/drupol/php-conventions/config/php71/grumphp.yml }
+  - { resource: vendor/drupol/php-conventions/config/php73/grumphp.yml }
 
 parameters:
+  tasks.license.holder: Thomas Portelange, Pol Dellaiera
+  tasks.license.date_from: 2020
   extra_tasks:
-    psalm: ~
     phpspec:
       verbose: true
     infection:
