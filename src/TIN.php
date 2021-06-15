@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin;
@@ -145,7 +150,7 @@ final class TIN
 
         // [alpha][alpha][not-alpha](anything)
         if (0 === preg_match(sprintf('/^%s$/', $pattern), $slug, $matches)) {
-            throw TINException::invalidPattern();
+            throw TINException::invalidPattern($slug);
         }
 
         return array_intersect_key($matches, array_flip(['country', 'tin']));

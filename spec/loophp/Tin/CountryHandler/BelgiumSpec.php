@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace spec\loophp\Tin\CountryHandler;
@@ -16,5 +21,7 @@ class BelgiumSpec extends AbstractAlgorithmSpec
 
     public const INVALID_NUMBER_PATTERN = ['wwwwwwwwwww'];
 
-    public const VALID_NUMBER = ['00012511119', '00022911101'];
+    public const INVALID_NUMBER_SYNTAX = ['00022911101'];
+
+    public const VALID_NUMBER = ['00012511119', '01062624339'];
 }

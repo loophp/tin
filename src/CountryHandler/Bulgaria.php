@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -26,9 +31,9 @@ final class Bulgaria extends CountryHandler
 
     protected function hasValidDate(string $tin): bool
     {
-        $year = (int) (mb_substr($tin, 0, 2));
-        $month = (int) (mb_substr($tin, 2, 2));
-        $day = (int) (mb_substr($tin, 4, 2));
+        $year = (int) (substr($tin, 0, 2));
+        $month = (int) (substr($tin, 2, 2));
+        $day = (int) (substr($tin, 4, 2));
 
         if (21 <= $month && 32 >= $month) {
             return checkdate($month - 20, $day, 1800 + $year);

@@ -1,8 +1,15 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
+
+use function strlen;
 
 /**
  * Germany.
@@ -46,16 +53,16 @@ final class Germany extends CountryHandler
 
     protected function hasValidRule(string $tin): bool
     {
-        return ($this->isFollowLength1($tin) && $this->isFollowRuleGermany1($tin)) ||
-            ($this->isFollowLength2($tin) && $this->isFollowRuleGermany2($tin));
+        return ($this->isFollowLength1($tin) && $this->isFollowRuleGermany1($tin))
+            || ($this->isFollowLength2($tin) && $this->isFollowRuleGermany2($tin));
     }
 
     private function calculateCheckDigit(string $tin): int
     {
-        $chars = (array) mb_str_split($tin);
+        $chars = (array) str_split($tin);
         $remainder_mod_eleven = 10;
 
-        for ($length = mb_strlen($tin), $counter = 0; $length - 1 > $counter; ++$counter) {
+        for ($length = strlen($tin), $counter = 0; $length - 1 > $counter; ++$counter) {
             $digit = (int) ($chars[$counter]);
             $remainder_mod_ten = ($digit + $remainder_mod_eleven) % 10;
 

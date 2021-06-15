@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -36,9 +41,9 @@ final class Belgium extends CountryHandler
 
     private function getDateType(string $tin): int
     {
-        $year = (int) (mb_substr($tin, 0, 2));
-        $month = (int) (mb_substr($tin, 2, 2));
-        $day = (int) (mb_substr($tin, 4, 2));
+        $year = (int) (substr($tin, 0, 2));
+        $month = (int) (substr($tin, 2, 2));
+        $day = (int) (substr($tin, 4, 2));
 
         $y1 = checkdate($month, $day, 1900 + $year);
         $y2 = checkdate($month, $day, 2000 + $year);
@@ -60,9 +65,9 @@ final class Belgium extends CountryHandler
 
     private function isFollowBelgiumRule1(string $tin): bool
     {
-        $divisionRemainderBy97 = (int) (mb_substr($tin, 0, 9)) % 97;
+        $divisionRemainderBy97 = (int) (substr($tin, 0, 9)) % 97;
 
-        return 97 - $divisionRemainderBy97 === (int) (mb_substr($tin, 9, 3));
+        return 97 - $divisionRemainderBy97 === (int) (substr($tin, 9, 3));
     }
 
     private function isFollowBelgiumRule1AndIsDateValid(string $tin): bool
@@ -74,9 +79,9 @@ final class Belgium extends CountryHandler
 
     private function isFollowBelgiumRule2(string $tin): bool
     {
-        $divisionRemainderBy97 = (2 + (int) mb_substr($tin, 0, 9)) % 97;
+        $divisionRemainderBy97 = (int) ('2' . substr($tin, 0, 9)) % 97;
 
-        return 97 - $divisionRemainderBy97 === (int) (mb_substr($tin, 9, 3));
+        return 97 - $divisionRemainderBy97 === (int) (substr($tin, 9, 3));
     }
 
     private function isFollowBelgiumRule2AndIsDateValid(string $tin): bool

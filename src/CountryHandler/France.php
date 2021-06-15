@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -24,18 +29,15 @@ final class France extends CountryHandler
      */
     public const PATTERN = '[0-3]\\d{12}';
 
-    /**
-     * {@inheritdoc}
-     */
     protected function hasValidRule(string $tin): bool
     {
-        $number = (int) (mb_substr($tin, 0, 10));
+        $number = (int) (substr($tin, 0, 10));
 
         $remainderBy511 = $number % 511;
 
         $checkDigits = 100 > $remainderBy511 ?
-            10 > $remainderBy511 ? (int) (mb_substr($tin, 12, 13)) : (int) (mb_substr($tin, 11, 13)) :
-            (int) (mb_substr($tin, 10, 13));
+            10 > $remainderBy511 ? (int) (substr($tin, 12, 13)) : (int) (substr($tin, 11, 13)) :
+            (int) (substr($tin, 10, 13));
 
         return $remainderBy511 === $checkDigits;
     }

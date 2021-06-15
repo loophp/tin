@@ -1,10 +1,17 @@
 <?php
 
+/**
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
 use loophp\Tin\Exception\TINException;
+
+use function strlen;
 
 /**
  * Base handler class.
@@ -27,18 +34,15 @@ abstract class CountryHandler implements CountryHandlerInterface
     public function getTIN(): string
     {
         if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $this->tin)) {
-            return mb_strtoupper($string);
+            return strtoupper($string);
         }
 
         return '';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     final public static function supports(string $country): bool
     {
-        return mb_strtoupper($country) === mb_strtoupper(static::COUNTRYCODE);
+        return strtoupper($country) === strtoupper(static::COUNTRYCODE);
     }
 
     final public function validate(): bool
@@ -46,19 +50,19 @@ abstract class CountryHandler implements CountryHandlerInterface
         $tin = $this->getTIN();
 
         if (!$this->hasValidLength($tin)) {
-            throw TINException::invalidLength();
+            throw TINException::invalidLength($this->tin);
         }
 
         if (!$this->hasValidPattern($tin)) {
-            throw TINException::invalidPattern();
+            throw TINException::invalidPattern($this->tin);
         }
 
         if (!$this->hasValidDate($tin)) {
-            throw TINException::invalidDate();
+            throw TINException::invalidDate($this->tin);
         }
 
         if (!$this->hasValidRule($tin)) {
-            throw TINException::invalidSyntax();
+            throw TINException::invalidSyntax($this->tin);
         }
 
         return true;
@@ -87,7 +91,7 @@ abstract class CountryHandler implements CountryHandlerInterface
     protected function digitsSum(int $int): int
     {
         return array_reduce(
-            (array) mb_str_split((string) $int),
+            (array) str_split((string) $int),
             static function (int $carry, string $digit): int {
                 return $carry + (int) $digit;
             },
@@ -103,13 +107,13 @@ abstract class CountryHandler implements CountryHandlerInterface
     protected function getAlphabeticalPosition(string $character): int
     {
         return false !== ($return = array_combine(range('a', 'z'), range(1, 26))) ?
-            $return[mb_strtolower($character)] :
+            $return[strtolower($character)] :
             0;
     }
 
     protected function getLastDigit(int $number): int
     {
-        $split = (array) mb_str_split((string) $number);
+        $split = (array) str_split((string) $number);
 
         return (int) end($split);
     }
@@ -139,7 +143,7 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     protected function matchLength(string $tin, int $length): bool
     {
-        return mb_strlen($tin) === $length;
+        return strlen($tin) === $length;
     }
 
     protected function matchPattern(string $subject, string $pattern): bool

@@ -18,13 +18,12 @@
         "php": ">= 7.1.3"
     },
     "require-dev": {
-        "drupol/php-conventions": "^1.7.2 || ^1.8.6 || ^2.0.2",
-        "friends-of-phpspec/phpspec-code-coverage": "^4.3",
-        "infection/infection": "^0.13.6 || ^0.15.3",
-        "phpspec/phpspec": "^5.1.2 || ^6.3",
-        "phpstan/phpstan-strict-rules": "^0.12.2",
-        "symfony/polyfill-mbstring": "^1.18",
-        "vimeo/psalm": "^3.18 || ^4"
+        "drupol/php-conventions": "^5",
+        "friends-of-phpspec/phpspec-code-coverage": "^5",
+        "infection/infection": "^0.23",
+        "infection/phpspec-adapter": "^0.1.2",
+        "phpspec/phpspec": "^7",
+        "phpstan/phpstan-strict-rules": "^0.12.2"
     },
     "autoload": {
         "psr-4": {
@@ -35,6 +34,13 @@
         "psr-4": {
             "tests\\loophp\\Tin\\": "tests/src/"
         }
+    },
+    "scripts": {
+        "changelog-unreleased": "docker-compose run auto_changelog -c .auto-changelog -u",
+        "changelog-version": "docker-compose run auto_changelog -c .auto-changelog -v",
+        "grumphp": "./vendor/bin/grumphp run",
+        "infection": "vendor/bin/infection run -j 2",
+        "phpspec": "vendor/bin/phpspec run -vvv --stop-on-failure"
     },
     "support": {
         "issues": "https://github.com/loophp/tin/issues",
