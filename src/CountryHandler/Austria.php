@@ -41,7 +41,7 @@ final class Austria extends CountryHandler
         $c8 = $this->digitAt($tin, 7);
         $c9 = $this->digitAt($tin, 8);
 
-        $sum = (int) array_sum([
+        $sum = array_sum([
             $c1,
             $c3,
             $c5,

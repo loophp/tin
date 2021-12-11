@@ -59,7 +59,7 @@ final class Germany extends CountryHandler
 
     private function calculateCheckDigit(string $tin): int
     {
-        $chars = (array) str_split($tin);
+        $chars = str_split($tin);
         $remainder_mod_eleven = 10;
 
         for ($length = strlen($tin), $counter = 0; $length - 1 > $counter; ++$counter) {

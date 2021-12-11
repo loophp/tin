@@ -91,7 +91,7 @@ abstract class CountryHandler implements CountryHandlerInterface
     protected function digitsSum(int $int): int
     {
         return array_reduce(
-            (array) str_split((string) $int),
+            str_split((string) $int),
             static function (int $carry, string $digit): int {
                 return $carry + (int) $digit;
             },
@@ -106,14 +106,12 @@ abstract class CountryHandler implements CountryHandlerInterface
      */
     protected function getAlphabeticalPosition(string $character): int
     {
-        return false !== ($return = array_combine(range('a', 'z'), range(1, 26))) ?
-            $return[strtolower($character)] :
-            0;
+        return 1 + array_flip(range('a', 'z'))[strtolower($character)];
     }
 
     protected function getLastDigit(int $number): int
     {
-        $split = (array) str_split((string) $number);
+        $split = str_split((string) $number);
 
         return (int) end($split);
     }

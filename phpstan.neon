@@ -1,7 +1,2 @@
 parameters:
     ignoreErrors:
-        -
-            message: "#Casting to array<int, string> something that\\'s already array<int, string>.#"
-            paths:
-                - src/CountryHandler/CountryHandler.php
-                - src/CountryHandler/Germany.php
