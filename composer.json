@@ -1,9 +1,8 @@
 {
     "name": "loophp/tin",
-    "type": "library",
     "description": "Provide validation tools for Taxpayer Identification Number",
-    "homepage": "https://github.com/loophp/tin",
     "license": "MIT",
+    "type": "library",
     "authors": [
         {
             "name": "Thomas Portelange",
@@ -14,6 +13,11 @@
             "email": "pol.dellaiera@protonmail.com"
         }
     ],
+    "homepage": "https://github.com/loophp/tin",
+    "support": {
+        "issues": "https://github.com/loophp/tin/issues",
+        "source": "https://github.com/loophp/tin"
+    },
     "require": {
         "php": ">= 7.1.3"
     },
@@ -41,9 +45,5 @@
         "grumphp": "./vendor/bin/grumphp run",
         "infection": "vendor/bin/infection run -j 2",
         "phpspec": "vendor/bin/phpspec run -vvv --stop-on-failure"
-    },
-    "support": {
-        "issues": "https://github.com/loophp/tin/issues",
-        "source": "https://github.com/loophp/tin"
     }
 }
