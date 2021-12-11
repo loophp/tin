@@ -67,9 +67,3 @@ jobs:
                   vendor/bin/infection run -j 2
               continue-on-error: true
 
-            - name: PHP Insights report
-              run: |
-                  rm -rf composer.lock vendor
-                  composer require nunomaduro/phpinsights --dev
-                  vendor/bin/phpinsights analyse src/ -n
-              continue-on-error: true
