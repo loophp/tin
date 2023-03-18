@@ -130,3 +130,4 @@ Support our contributors by sponsoring them on [Github][github sponsors link].
 [github workflow status]:
   https://img.shields.io/github/actions/workflow/status/loophp/tin/tests.yml?branch=master&style=flat-square
 [github sponsors link]: https://github.com/loophp/tin/graphs/contributors
+[github actions link]: https://github.com/loophp/tin/actions
