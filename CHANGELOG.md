@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Merged
 
+- chore: modernize static files [`#23`](https://github.com/loophp/tin/pull/23)
 - chore(deps): update actions/stale action to v7 [`#20`](https://github.com/loophp/tin/pull/20)
 - chore(deps): update dependency infection/infection to ^0.26 [`#8`](https://github.com/loophp/tin/pull/8)
 - chore(deps): update dependency infection/phpspec-adapter to ^0.2.0 [`#9`](https://github.com/loophp/tin/pull/9)
@@ -23,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 
-- chore: modernize static files [`e208400`](https://github.com/loophp/tin/commit/e2084006358bbc91a924a9f53ba6f36aed962b27)
+- fix: add missing badge [`810c5a6`](https://github.com/loophp/tin/commit/810c5a61633f5056fa05aed381cf1721763f59bd)
 - chore(deps): add renovate.json [`ba59b22`](https://github.com/loophp/tin/commit/ba59b22f20dbf5be8a282a1be5ada0df306a360b)
 - Revert "ci: Tests on PHP 8.1." [`71e61bd`](https://github.com/loophp/tin/commit/71e61bdb22b53fdb7095d1162238e25a1fa5ddad)
 - chore: Update static files. [`1a4a034`](https://github.com/loophp/tin/commit/1a4a034cf1fa479f10a62fb90a2c81c433d958ea)
