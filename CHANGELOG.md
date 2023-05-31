@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.0](https://github.com/loophp/tin/compare/1.0.3...1.1.0)
+## [1.1.1](https://github.com/loophp/tin/compare/1.1.0...1.1.1)
+
+### Fixed
+
+- fix: update how slug are parsed [`#27`](https://github.com/loophp/tin/issues/27)
+
+### Commits
+
+- chore: minor static files update [`68413a3`](https://github.com/loophp/tin/commit/68413a3b1d08bfd23c3210329840e0e72c709711)
+
+## [1.1.0](https://github.com/loophp/tin/compare/1.0.3...1.1.0) - 2023-03-18
 
 ### Merged
 
@@ -24,6 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Commits
 
+- docs: update changelog [`556e552`](https://github.com/loophp/tin/commit/556e5527f8a8d63f6f257b562f5259dec65cbfd9)
 - fix: add missing badge [`810c5a6`](https://github.com/loophp/tin/commit/810c5a61633f5056fa05aed381cf1721763f59bd)
 - chore(deps): add renovate.json [`ba59b22`](https://github.com/loophp/tin/commit/ba59b22f20dbf5be8a282a1be5ada0df306a360b)
 - Revert "ci: Tests on PHP 8.1." [`71e61bd`](https://github.com/loophp/tin/commit/71e61bdb22b53fdb7095d1162238e25a1fa5ddad)
