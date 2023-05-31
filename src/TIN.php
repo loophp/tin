@@ -141,18 +141,13 @@ final class TIN
     /**
      * @throws TINException
      *
-     * @return array<array-key, string>
+     * @return array<string, string>
      */
     private function parse(string $slug): array
     {
-        $matches = [];
-        $pattern = '(?<country>[[:alpha:]]{2})(?<tin>([^[:alpha:]])([[:alnum:]\-+]+))';
-
-        // [alpha][alpha][not-alpha](anything)
-        if (0 === preg_match(sprintf('/^%s$/', $pattern), $slug, $matches)) {
-            throw TINException::invalidPattern($slug);
-        }
-
-        return array_intersect_key($matches, array_flip(['country', 'tin']));
+        return array_combine(
+            ['country', 'tin'],
+            sscanf($slug, '%2s%s')
+        );
     }
 }
