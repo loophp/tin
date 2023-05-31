@@ -5,4 +5,4 @@
 /example/
 /.idea/
 /test.php
-
+/.php_cs.cache
