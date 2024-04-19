@@ -71,7 +71,7 @@ final class Spain extends CountryHandler
 
     protected function hasValidPattern(string $tin): bool
     {
-        return $this->isFollowPattern1($tin) || $this->isFollowPattern2($tin) || $this->isFollowPattern3($tin);
+        return $this->isFollowPattern1($tin) || $this->isFollowPattern2($tin);
     }
 
     protected function hasValidRule(string $tin): bool
@@ -128,11 +128,6 @@ final class Spain extends CountryHandler
     private function isFollowPattern2(string $tin): bool
     {
         return $this->matchPattern($tin, self::PATTERN_2);
-    }
-
-    private function isFollowPattern3(string $tin): bool
-    {
-        return $this->matchPattern($tin, self::PATTERN_3);
     }
 
     private function isFollowRule1(string $tin): bool
