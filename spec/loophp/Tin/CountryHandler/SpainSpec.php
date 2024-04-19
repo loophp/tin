@@ -19,5 +19,5 @@ class SpainSpec extends AbstractAlgorithmSpec
 
     public const INVALID_NUMBER_PATTERN = 'wwwwwwwww';
 
-    public const VALID_NUMBER = ['54237A', 'X1234567L', 'Z1234567R', 'M2812345C'];
+    public const VALID_NUMBER = ['54237A', 'X1234567L', 'Z1234567R', 'M2812345C', 'B05327986', 'P2009300A'];
 }
