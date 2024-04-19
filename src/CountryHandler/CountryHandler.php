@@ -146,7 +146,7 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     protected function matchPattern(string $subject, string $pattern): bool
     {
-        return 1 === preg_match(sprintf('/%s/', $pattern), $subject);
+        return 1 === preg_match(sprintf('/%s/i', $pattern), $subject);
     }
 
     protected function normalizeTin(string $tin): string

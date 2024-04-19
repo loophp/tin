@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
-use function strlen;
-
 use const STR_PAD_LEFT;
 
 /**
@@ -31,23 +29,17 @@ final class Spain extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN_1 = '\\d{8}[a-zA-Z]';
+    public const PATTERN_1 = '(^[XYZ\d]\d{7})([TRWAGMYFPDXBNJZSQVHLCKE]$)';
 
     /**
      * @var string
      */
-    public const PATTERN_2 = '[XYZKLMxyzklm]\\d{7}[a-zA-Z]';
+    public const PATTERN_2 = '(^[ABCDEFGHIJKLMUV])(\d{7})(\d$)';
 
     /**
-     * @var array<int, string>
+     * @var string
      */
-    private static $tabConvertToChar = [
-        'T', 'R', 'W', 'A', 'G',
-        'M', 'Y', 'F', 'P', 'D',
-        'X', 'B', 'N', 'J', 'Z',
-        'S', 'Q', 'V', 'H', 'L',
-        'C', 'K', 'E',
-    ];
+    public const PATTERN_3 = '(^[KLMNPQRSW])(\d{7})([JABCDEFGHI]$)';
 
     public function getTIN(): string
     {
@@ -56,38 +48,12 @@ final class Spain extends CountryHandler
 
     protected function hasValidPattern(string $tin): bool
     {
-        return $this->isFollowPattern1($tin) || $this->isFollowPattern2($tin);
+        return $this->isFollowPattern1($tin) || $this->isFollowPattern2($tin) || $this->isFollowPattern3($tin);
     }
 
     protected function hasValidRule(string $tin): bool
     {
-        return ($this->isFollowPattern1($tin) && $this->isFollowRule1($tin))
-            || ($this->isFollowPattern2($tin) && $this->isFollowRule2($tin));
-    }
-
-    private function getCharFromNumber(int $sum): string
-    {
-        return self::$tabConvertToChar[$sum - 1];
-    }
-
-    private function getNumberFromChar(string $m): int
-    {
-        switch ($m) {
-            case 'K':
-            case 'L':
-            case 'M':
-            case 'X':
-                return 0;
-
-            case 'Y':
-                return 1;
-
-            case 'Z':
-                return 2;
-
-            default:
-                return -1;
-        }
+        return $this->isFollowRule1($tin) || $this->isFollowRule2($tin) || $this->isFollowRule3($tin);
     }
 
     private function isFollowPattern1(string $tin): bool
@@ -100,24 +66,59 @@ final class Spain extends CountryHandler
         return $this->matchPattern($tin, self::PATTERN_2);
     }
 
+    private function isFollowPattern3(string $tin): bool
+    {
+        return $this->matchPattern($tin, self::PATTERN_3);
+    }
+
     private function isFollowRule1(string $tin): bool
     {
-        $number = (int) (substr($tin, 0, strlen($tin) - 1));
-        $checkDigit = $tin[strlen($tin) - 1];
-        $remainderBy23 = $number % 23;
-        $sum = $remainderBy23 + 1;
+        if (1 !== preg_match('~' . self::PATTERN_1 . '~', strtoupper($tin), $parts)) {
+            return false;
+        }
 
-        return $this->getCharFromNumber($sum) === $checkDigit;
+        $control = 'TRWAGMYFPDXBNJZSQVHLCKE';
+        $nie = ['X', 'Y', 'Z'];
+
+        $nif = (int) str_replace($nie, array_keys($nie), $parts[1]);
+
+        $cheksum = substr($control, $nif % 23, 1);
+
+        return $parts[2] === $cheksum;
     }
 
     private function isFollowRule2(string $tin): bool
     {
-        $c1 = (string) $this->getNumberFromChar($tin[0]);
-        $number = (int) ($c1 . substr($tin, 1, strlen($tin)));
-        $checkDigit = $tin[strlen($tin) - 1];
-        $remainderBy23 = $number % 23;
-        $sum = $remainderBy23 + 1;
+        if (1 !== preg_match('~' . self::PATTERN_2 . '~', strtoupper($tin), $parts)) {
+            return false;
+        }
 
-        return $this->getCharFromNumber($sum) === $checkDigit;
+        $checksum = 0;
+
+        foreach (str_split($parts[2]) as $pos => $val) {
+            $checksum += array_sum(str_split((string) ((int) $val * (2 - ($pos % 2)))));
+        }
+
+        $checksum = (string) ((10 - ($checksum % 10)) % 10);
+
+        return $parts[3] === $checksum;
+    }
+
+    private function isFollowRule3(string $tin): bool
+    {
+        if (1 !== preg_match('~' . self::PATTERN_3 . '~', strtoupper($tin), $parts)) {
+            return false;
+        }
+
+        $control = 'JABCDEFGHI';
+        $checksum = 0;
+
+        foreach (str_split($parts[2]) as $pos => $val) {
+            $checksum += array_sum(str_split((string) ((int) $val * (2 - ($pos % 2)))));
+        }
+
+        $checksum = substr($control, ((10 - ($checksum % 10)) % 10), 1);
+
+        return $parts[3] === $checksum;
     }
 }
