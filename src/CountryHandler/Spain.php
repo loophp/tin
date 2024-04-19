@@ -42,7 +42,7 @@ final class Spain extends CountryHandler
      *
      * @var string
      */
-    public const PATTERN_2 = '(^[ABCDEFGHIJKLMNPQRSUVW])(\d{7})([JABCDEFGHI\d]$)';
+    public const PATTERN_2 = '^[ABCDEFGHIJKLMNPQRSUVW](\d{7})([JABCDEFGHI\d]$)';
 
     public function getTIN(): string
     {
@@ -71,29 +71,33 @@ final class Spain extends CountryHandler
 
     private function isFollowRule1(string $tin): bool
     {
-        if (1 !== preg_match('~' . self::PATTERN_1 . '~', strtoupper($tin), $parts)) {
+        if (1 !== preg_match('~' . self::PATTERN_1 . '~', strtoupper($tin), $tinParts)) {
             return false;
         }
+
+        [, $tinNumber, $tinChecksum] = $tinParts;
 
         $control = 'TRWAGMYFPDXBNJZSQVHLCKE';
         $nie = ['X', 'Y', 'Z'];
 
-        $nif = (int) str_replace($nie, array_keys($nie), $parts[1]);
+        $tinNumber = (int) str_replace($nie, array_keys($nie), $tinNumber);
 
-        $cheksum = substr($control, $nif % 23, 1);
+        $cheksum = substr($control, $tinNumber % 23, 1);
 
-        return $parts[2] === $cheksum;
+        return $tinChecksum === $cheksum;
     }
 
     private function isFollowRule2(string $tin): bool
     {
-        if (1 !== preg_match('~' . self::PATTERN_2 . '~', strtoupper($tin), $parts)) {
+        if (1 !== preg_match('~' . self::PATTERN_2 . '~', strtoupper($tin), $tinParts)) {
             return false;
         }
 
+        [, $tinNumber, $tinChecksum] = $tinParts;
+
         $checksum = 0;
 
-        foreach (str_split($parts[2]) as $pos => $val) {
+        foreach (str_split($tinNumber) as $pos => $val) {
             $checksum += array_sum(str_split((string) ((int) $val * (2 - ($pos % 2)))));
         }
 
@@ -101,6 +105,6 @@ final class Spain extends CountryHandler
         $checksum1 = (string) ((10 - ($checksum % 10)) % 10);
         $checksum2 = substr($control, (int) $checksum1, 1);
 
-        return $parts[3] === $checksum1 || $parts[3] === $checksum2;
+        return $tinChecksum === $checksum1 || $tinChecksum === $checksum2;
     }
 }
