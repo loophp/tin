@@ -42,7 +42,7 @@ final class Spain extends CountryHandler
      *
      * @var string
      */
-    public const PATTERN_2 = '^[ABCDEFGHIJKLMNPQRSUVW](\d{7})([JABCDEFGHI\d]$)';
+    public const PATTERN_2 = '^[ABCDEFGHJKLMNPQRSUVW](\d{7})([JABCDEFGHI\d]$)';
 
     public function getTIN(): string
     {
