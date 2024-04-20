@@ -115,8 +115,7 @@ The number is divided by 23 and the remainder is replaced by a letter that is de
 5. **19** is the **L** letter
 
 ### Natural Persons without DNI or NIE and Non-Natural Persons
-
-**Warning: No official references**
+[Reference](https://www.juntadeandalucia.es/servicios/madeja/sites/default/files/historico/1.4.0/contenido-libro-pautas-196.html#Validacion_de_NIF_con_tipo_distinto_a_DNI)
 
 **Cases:**
 |   Format  |                Explanation                |
