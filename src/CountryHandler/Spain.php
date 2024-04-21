@@ -19,6 +19,21 @@ final class Spain extends CountryHandler
     /**
      * @var string
      */
+    public const CHECKSUM_LETTER = 'KLMNPQRSW';
+
+    /**
+     * @var string
+     */
+    public const CONTROL_1 = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+    /**
+     * @var string
+     */
+    public const CONTROL_2 = 'JABCDEFGHI';
+
+    /**
+     * @var string
+     */
     public const COUNTRYCODE = 'ES';
 
     /**
@@ -27,12 +42,17 @@ final class Spain extends CountryHandler
     public const LENGTH = 9;
 
     /**
+     * @var array<string>
+     */
+    public const NIE = ['X', 'Y', 'Z'];
+
+    /**
      * Spanish Natural Persons: DNI
      * Foreigners with NIE.
      *
      * @var string
      */
-    public const PATTERN_1 = '(^[XYZ\d]\d{7})([TRWAGMYFPDXBNJZSQVHLCKE]$)';
+    public const PATTERN_1 = '(^[XYZ\d]\d{7})([' . self::CONTROL_1 . ']$)';
 
     /**
      * Non-resident Spaniards without DNI
@@ -42,7 +62,48 @@ final class Spain extends CountryHandler
      *
      * @var string
      */
-    public const PATTERN_2 = '^[ABCDEFGHJKLMNPQRSUVW](\d{7})([JABCDEFGHI\d]$)';
+    public const PATTERN_2 = '(^[ABCDEFGHJKLMNPQRSUVW])(\d{7})([' . self::CONTROL_2 . '\d]$)';
+
+    /**
+     * Return checksum char for Spanish TIN.
+     *
+     * @param string $tin
+     * The TIN without Country indicative ('ES')
+     * @param null|bool $digit
+     * Optional: for Non-Natural Persons TIN forces return checksum char as digit 0-9
+     *
+     * @return null|string
+     * Return checksum char or null on failure
+     */
+    public static function getChecksum(string $tin, ?bool $digit = null): ? string
+    {
+        // Natural Persons with DNI or NIE
+        if (1 === preg_match('~' . self::PATTERN_1 . '?~', strtoupper($tin), $tinParts)) {
+            $tinNumber = (int) str_replace(self::NIE, array_keys(self::NIE), $tinParts[1]);
+
+            return substr(self::CONTROL_1, $tinNumber % 23, 1);
+        }
+
+        // Natural Persons without DNI or NIE and Non-Natural Persons
+        if (1 === preg_match('~' . self::PATTERN_2 . '?~', strtoupper($tin), $tinParts)) {
+            $checksum = 0;
+
+            foreach (str_split($tinParts[2]) as $pos => $val) {
+                $checksum += array_sum(str_split((string) ((int) $val * (2 - ($pos % 2)))));
+            }
+
+            $checksum1 = (string) ((10 - ($checksum % 10)) % 10);
+            $checksum2 = substr(self::CONTROL_2, (int) $checksum1, 1);
+
+            if (null === $digit) {
+                $digit = false === strpos(self::CHECKSUM_LETTER, $tinParts[1]);
+            }
+
+            return $digit ? $checksum1 : $checksum2;
+        }
+
+        return null;
+    }
 
     public function getTIN(): string
     {
@@ -77,14 +138,7 @@ final class Spain extends CountryHandler
 
         [, $tinNumber, $tinChecksum] = $tinParts;
 
-        $control = 'TRWAGMYFPDXBNJZSQVHLCKE';
-        $nie = ['X', 'Y', 'Z'];
-
-        $tinNumber = (int) str_replace($nie, array_keys($nie), $tinNumber);
-
-        $cheksum = substr($control, $tinNumber % 23, 1);
-
-        return $tinChecksum === $cheksum;
+        return self::getChecksum($tinNumber) === $tinChecksum;
     }
 
     private function isFollowRule2(string $tin): bool
@@ -93,18 +147,11 @@ final class Spain extends CountryHandler
             return false;
         }
 
-        [, $tinNumber, $tinChecksum] = $tinParts;
+        [,$tinFirstLetter , $tinNumber, $tinChecksum] = $tinParts;
 
-        $checksum = 0;
+        $tinNumber = $tinFirstLetter . $tinNumber;
+        $digit = (false === strpos(self::CONTROL_2, $tinChecksum));
 
-        foreach (str_split($tinNumber) as $pos => $val) {
-            $checksum += array_sum(str_split((string) ((int) $val * (2 - ($pos % 2)))));
-        }
-
-        $control = 'JABCDEFGHI';
-        $checksum1 = (string) ((10 - ($checksum % 10)) % 10);
-        $checksum2 = substr($control, (int) $checksum1, 1);
-
-        return $tinChecksum === $checksum1 || $tinChecksum === $checksum2;
+        return self::getChecksum($tinNumber, $digit) === $tinChecksum;
     }
 }
