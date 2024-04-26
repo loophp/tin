@@ -36,12 +36,12 @@ Concerning the **entities**, they are obliged to obtain a TIN, which is issued b
 1. **DNI** = Documento Nacional de Identidad (National Identity Card)
 2. **NIE** = Número de Identificación de Extranjero (Foreigners’ Identification Number)
 
-|   Format  |               Explanation              |                      Comments                      |
-|---------- |----------------------------------------|----------------------------------------------------|
-| 99999999C | 8 digits + 1 Control letter            | Spanish Natural Persons: [DNI¹](#note-1)           |
-| X9999999C | Letter X + 7 digits + 1 Control letter | Foreigners with [NIE²](#note-2)                    |
-| Y9999999C | Letter Y + 7 digits + 1 Control letter | Foreigners with [NIE²](#note-2)                    |
-| Z9999999C | Letter Z + 7 digits + 1 Control letter | Foreigners with [NIE²](#note-2)                    |
+|   Format  |               Explanation              |           Comments           |
+|---------- |----------------------------------------|------------------------------|
+| 99999999C | 8 digits + 1 Control letter            | Spanish Natural Persons: DNI |
+| X9999999C | Letter X + 7 digits + 1 Control letter | Foreigners with NIE          |
+| Y9999999C | Letter Y + 7 digits + 1 Control letter | Foreigners with NIE          |
+| Z9999999C | Letter Z + 7 digits + 1 Control letter | Foreigners with NIE          |
 
 [TOC](#table-of-contents)
 
@@ -49,11 +49,11 @@ Concerning the **entities**, they are obliged to obtain a TIN, which is issued b
 1. **DNI** = Documento Nacional de Identidad (National Identity Card)
 2. **NIE** = Número de Identificación de Extranjero (Foreigners’ Identification Number)
 
-|   Format  |               Explanation              |                      Comments                      |
-|---------- |----------------------------------------|----------------------------------------------------|
-| K9999999C | Letter K + 7 digits + 1 Control letter | Resident Spaniards under 14 without [DNI¹](#note-1)|
-| L9999999C | Letter L + 7 digits + 1 Control letter | Non-resident Spaniards without [DNI¹](#note-1)     |
-| M9999999C | Letter M + 7 digits + 1 Control letter | Foreigners without [NIE²](#note-2)                 |
+|   Format  |               Explanation              |                 Comments                |
+|---------- |----------------------------------------|-----------------------------------------|
+| K9999999C | Letter K + 7 digits + 1 Control letter | Resident Spaniards under 14 without DNI |
+| L9999999C | Letter L + 7 digits + 1 Control letter | Non-resident Spaniards without DNI      |
+| M9999999C | Letter M + 7 digits + 1 Control letter | Foreigners without NIE                  |
 
 [TOC](#table-of-contents)
 
