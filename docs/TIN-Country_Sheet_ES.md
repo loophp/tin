@@ -1,10 +1,19 @@
 # TAX IDENTIFICATION NUMBERS (TINs) - Country Sheet: Spain (ES)
 
 **References:**
-[Spain-TIN.pdf on OECD](https://www.oecd.org/tax/automatic-exchange/crs-implementation-and-assistance/tax-identification-numbers/Spain-TIN.pdf)
-[BOE-A-2008-3580](https://www.boe.es/eli/es/o/2008/02/20/eha451/con#a3)
-[Calculation of the DNI/NIE check digit](https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/dni/calculo-del-digito-de-control-del-nif-nie/)
+- [Spain-TIN.pdf on OECD](https://www.oecd.org/tax/automatic-exchange/crs-implementation-and-assistance/tax-identification-numbers/Spain-TIN.pdf)
+- [BOE-A-2008-3580](https://www.boe.es/eli/es/o/2008/02/20/eha451/con#a3)
+- [Calculation of the DNI/NIE check digit](https://www.interior.gob.es/opencms/es/servicios-al-ciudadano/tramites-y-gestiones/dni/calculo-del-digito-de-control-del-nif-nie/)
 
+# Table of contents
+- [Section I – TIN Description](#section-i--tin-description)
+- [Section II – TIN Structure](#section-ii--tin-structure)
+  - [Natural Persons with DNI¹ or NIE²](#natural-persons-with-dni-or-nie)
+  - [Natural Persons without DNI¹ or NIE²](#natural-persons-without-dni-or-nie)
+  - [Non-Natural Persons](#non-natural-persons)
+- [Section III – Calculation of the TIN check digit](#section-iii--calculation-of-the-tin-check-digit)
+  - [Natural Persons with DNI or NIE](#natural-persons-with-dni-or-nie-1)
+  - [Natural Persons without DNI or NIE and Non-Natural Persons](#natural-persons-without-dni-or-nie-and-non-natural-persons)
 
 ## Section I – TIN Description
 
@@ -19,9 +28,13 @@ transitory nature, until they obtain a Foreigners’ Identification Number (NIE)
 
 Concerning the **entities**, they are obliged to obtain a TIN, which is issued by the Tax Administration
 
+[TOC](#table-of-contents)
+
 ## Section II – TIN Structure
 
-### Natural Persons
+### Natural Persons with DNI¹ or NIE²
+1. **DNI** = Documento Nacional de Identidad (National Identity Card)
+2. **NIE** = Número de Identificación de Extranjero (Foreigners’ Identification Number)
 
 |   Format  |               Explanation              |                      Comments                      |
 |---------- |----------------------------------------|----------------------------------------------------|
@@ -29,17 +42,20 @@ Concerning the **entities**, they are obliged to obtain a TIN, which is issued b
 | X9999999C | Letter X + 7 digits + 1 Control letter | Foreigners with [NIE²](#note-2)                    |
 | Y9999999C | Letter Y + 7 digits + 1 Control letter | Foreigners with [NIE²](#note-2)                    |
 | Z9999999C | Letter Z + 7 digits + 1 Control letter | Foreigners with [NIE²](#note-2)                    |
+
+[TOC](#table-of-contents)
+
+### Natural Persons without DNI¹ or NIE²
+1. **DNI** = Documento Nacional de Identidad (National Identity Card)
+2. **NIE** = Número de Identificación de Extranjero (Foreigners’ Identification Number)
+
+|   Format  |               Explanation              |                      Comments                      |
+|---------- |----------------------------------------|----------------------------------------------------|
 | K9999999C | Letter K + 7 digits + 1 Control letter | Resident Spaniards under 14 without [DNI¹](#note-1)|
 | L9999999C | Letter L + 7 digits + 1 Control letter | Non-resident Spaniards without [DNI¹](#note-1)     |
 | M9999999C | Letter M + 7 digits + 1 Control letter | Foreigners without [NIE²](#note-2)                 |
 
-##### Notes
-
-###### Note 1:
-**DNI** = Documento Nacional de Identidad (National Identity Card)
-
-###### Note 2:
-**NIE** = Número de Identificación de Extranjero (Foreigners’ Identification Number)
+[TOC](#table-of-contents)
 
 ### Non-Natural Persons
 
@@ -68,6 +84,8 @@ For entities, the tax identification number will begin with a letter, which will
 | V | Otros tipos no definidos en el resto de claves | Other types not defined in the rest of the keys |
 | N | Entidad extranjera | Foreign entity |
 | W | Establecimiento permanente de entidad no residente en territorio español | Permanent establishment of a non-resident in Spain |
+
+[TOC](#table-of-contents)
 
 ## Section III – Calculation of the TIN check digit
 
@@ -114,6 +132,8 @@ The number is divided by 23 and the remainder is replaced by a letter that is de
 4. TinNumber MODULUS 23 = **01234567 % 23** = **19**
 5. **19** is the **L** letter
 
+[TOC](#table-of-contents)
+
 ### Natural Persons without DNI or NIE and Non-Natural Persons
 [Reference](https://www.juntadeandalucia.es/servicios/madeja/sites/default/files/historico/1.4.0/contenido-libro-pautas-196.html#Validacion_de_NIF_con_tipo_distinto_a_DNI)
 
@@ -151,3 +171,5 @@ TIN = **M2812345C** => Digits: **2812345**
 4. 10 - **7** = **3**
 
 Result = 3 => Letter **C**
+
+[TOC](#table-of-contents)
