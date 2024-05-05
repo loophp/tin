@@ -16,6 +16,11 @@ use Exception;
  */
 final class TINException extends Exception
 {
+    public static function emptySlug(): TINException
+    {
+        return new self('Invalid Slug. Reason: Void string.');
+    }
+
     public static function invalidCountry(string $countryCode): TINException
     {
         return new self(sprintf('No handler available for this country code: %s.', $countryCode));
