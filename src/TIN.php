@@ -145,9 +145,13 @@ final class TIN
      */
     private function parse(string $slug): array
     {
-        return array_combine(
-            ['country', 'tin'],
-            sscanf($slug, '%2s%s')
-        );
+        if (1 !== preg_match('~(?P<country>^\w{2})(?P<tin>.+$)~', $slug, $parsed)) {
+            throw TINException::invalidSyntax($slug);
+        }
+
+        return [
+            'country' => $parsed['country'],
+            'tin' => $parsed['tin'],
+        ];
     }
 }

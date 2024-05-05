@@ -42,10 +42,10 @@
     },
     "config": {
         "allow-plugins": {
+            "ergebnis/composer-normalize": true,
             "infection/extension-installer": true,
-            "phpstan/extension-installer": true,
             "phpro/grumphp": true,
-            "ergebnis/composer-normalize": true
+            "phpstan/extension-installer": true
         }
     },
     "scripts": {
