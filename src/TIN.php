@@ -149,7 +149,12 @@ final class TIN
             throw TINException::emptySlug();
         }
 
-        [$country, $tin] = sscanf($slug, '%2s%s') + [null, null];
+        /**
+         * @psalm-suppress PossiblyUndefinedArrayOffset
+         * @psalm-suppress PossiblyNullArrayAccess
+         */
+        // @phpstan-ignore-next-line
+        [$country, $tin] = sscanf($slug, '%2s%s');
 
         return [
             'country' => (string) $country,
