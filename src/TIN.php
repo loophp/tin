@@ -149,7 +149,7 @@ final class TIN
             throw TINException::emptySlug();
         }
 
-        sscanf($slug, '%2s%s', $country, $tin);
+        [$country, $tin] = sscanf($slug, '%2s%s') + [null, null];
 
         return [
             'country' => (string) $country,
