@@ -141,7 +141,7 @@ final class TIN
     /**
      * @throws TINException
      *
-     * @return array<string, string>
+     * @return non-empty-array<'country'|'tin', string>
      */
     private function parse(string $slug): array
     {
@@ -149,12 +149,7 @@ final class TIN
             throw TINException::emptySlug();
         }
 
-        /**
-         * @psalm-suppress PossiblyUndefinedArrayOffset
-         * @psalm-suppress PossiblyNullArrayAccess
-         */
-        // @phpstan-ignore-next-line
-        [$country, $tin] = sscanf($slug, '%2s%s');
+        [$country, $tin] = sscanf($slug, '%2s%s') + ['', ''];
 
         return [
             'country' => (string) $country,
