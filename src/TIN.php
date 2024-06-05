@@ -83,10 +83,12 @@ final class TIN
      * @var string
      */
     private $slug;
+    private $clean;
 
-    private function __construct(string $slug)
+    private function __construct(string $slug, bool $clean)
     {
         $this->slug = $slug;
+        $this->clean = $clean;
     }
 
     /**
@@ -99,14 +101,14 @@ final class TIN
         return $this->getAlgorithm($parsedTin['country'], $parsedTin['tin'])->validate();
     }
 
-    public static function from(string $countryCode, string $tin): TIN
+    public static function from(string $countryCode, string $tin, ?bool $clean = true): TIN
     {
-        return self::fromSlug($countryCode . $tin);
+        return self::fromSlug($countryCode . $tin, $clean);
     }
 
-    public static function fromSlug(string $slug): TIN
+    public static function fromSlug(string $slug, ?bool $clean = true): TIN
     {
-        return new self($slug);
+        return new self($slug, $clean);
     }
 
     public function isValid(): bool
@@ -127,7 +129,7 @@ final class TIN
     {
         foreach ($this->algorithms as $algorithm) {
             if (true === $algorithm::supports($country)) {
-                $handler = new $algorithm($tin);
+                $handler = new $algorithm($tin, $this->clean);
 
                 if ($handler instanceof CountryHandlerInterface) {
                     return $handler;
