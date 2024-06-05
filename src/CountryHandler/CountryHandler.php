@@ -22,17 +22,22 @@ abstract class CountryHandler implements CountryHandlerInterface
      * @var string
      */
     private $tin;
+    private $clean;
 
     /**
      * CountryHandler constructor.
      */
-    final public function __construct(string $tin = '')
+    final public function __construct(string $tin = '', ?bool $clean = true)
     {
         $this->tin = $tin;
+        $this->clean = $clean;
     }
 
     public function getTIN(): string
     {
+        if (!$this->clean) {
+            return strtoupper($this->tin);
+        }
         if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $this->tin)) {
             return strtoupper($string);
         }
