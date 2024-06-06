@@ -162,7 +162,7 @@ final class TIN
 
         return [
             'country' => (string) $country,
-            'tin' => true === $strict ? $this->normalizeTin((string) $tin) : (string) $tin,
+            'tin' => true === $strict ? (string) $tin : $this->normalizeTin((string) $tin),
         ];
     }
 }
