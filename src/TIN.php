@@ -141,13 +141,19 @@ final class TIN
     /**
      * @throws TINException
      *
-     * @return array<string, string>
+     * @return non-empty-array<'country'|'tin', string>
      */
     private function parse(string $slug): array
     {
-        return array_combine(
-            ['country', 'tin'],
-            sscanf($slug, '%2s%s')
-        );
+        if ('' === $slug) {
+            throw TINException::emptySlug();
+        }
+
+        [$country, $tin] = sscanf($slug, '%2s%s') + ['', ''];
+
+        return [
+            'country' => (string) $country,
+            'tin' => (string) $tin,
+        ];
     }
 }
