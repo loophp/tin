@@ -33,7 +33,11 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     public function getTIN(): string
     {
-        return $this->tin;
+        if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $this->tin)) {
+            return strtoupper($string);
+        }
+
+        return '';
     }
 
     final public static function supports(string $country): bool
@@ -43,7 +47,7 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     final public function validate(): bool
     {
-        $tin = $this->normalizeTin($this->getTIN());
+        $tin = $this->getTIN();
 
         if (!$this->hasValidLength($tin)) {
             throw TINException::invalidLength($this->tin);
@@ -122,12 +126,12 @@ abstract class CountryHandler implements CountryHandlerInterface
      */
     protected function hasValidLength(string $tin): bool
     {
-        return $this->matchLength($this->normalizeTin($tin), static::LENGTH);
+        return $this->matchLength($this->getTIN(), static::LENGTH);
     }
 
     protected function hasValidPattern(string $tin): bool
     {
-        return $this->matchPattern($this->normalizeTin($tin), static::PATTERN);
+        return $this->matchPattern($this->getTIN(), static::PATTERN);
     }
 
     protected function hasValidRule(string $tin): bool
@@ -137,7 +141,7 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     protected function matchLength(string $tin, int $length): bool
     {
-        return strlen($this->normalizeTin($tin)) === $length;
+        return strlen($tin) === $length;
     }
 
     protected function matchPattern(string $subject, string $pattern): bool

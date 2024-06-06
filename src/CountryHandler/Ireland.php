@@ -88,12 +88,12 @@ final class Ireland extends CountryHandler
 
     private function isFollowPattern1(): bool
     {
-        return $this->matchPattern($this->normalizeTin($this->getTIN()), self::PATTERN_1);
+        return $this->matchPattern($this->getTIN(), self::PATTERN_1);
     }
 
     private function isFollowPattern2(): bool
     {
-        return $this->matchPattern($this->normalizeTin($this->getTIN()), self::PATTERN_2);
+        return $this->matchPattern($this->getTIN(), self::PATTERN_2);
     }
 
     private function letterToNumber(string $toConv): int

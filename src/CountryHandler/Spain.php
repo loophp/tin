@@ -51,7 +51,7 @@ final class Spain extends CountryHandler
 
     public function getTIN(): string
     {
-        return str_pad($this->normalizeTin(parent::getTIN()), self::LENGTH, '0', STR_PAD_LEFT);
+        return str_pad(parent::getTIN(), self::LENGTH, '0', STR_PAD_LEFT);
     }
 
     protected function hasValidPattern(string $tin): bool
