@@ -92,9 +92,9 @@ final class TIN
     /**
      * @throws TINException
      */
-    public function check(): bool
+    public function check(bool $strict = false): bool
     {
-        $parsedTin = $this->parse($this->slug);
+        $parsedTin = $this->parse($this->slug, $strict);
 
         return $this->getAlgorithm($parsedTin['country'], $parsedTin['tin'])->validate();
     }
@@ -109,10 +109,10 @@ final class TIN
         return new self($slug);
     }
 
-    public function isValid(): bool
+    public function isValid(bool $strict = false): bool
     {
         try {
-            $this->check();
+            $this->check($strict);
         } catch (TINException $e) {
             return false;
         }
@@ -138,12 +138,21 @@ final class TIN
         throw TINException::invalidCountry($country);
     }
 
+    private function normalizeTin(string $tin): string
+    {
+        if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $tin)) {
+            return strtoupper($string);
+        }
+
+        return '';
+    }
+
     /**
      * @throws TINException
      *
      * @return non-empty-array<'country'|'tin', string>
      */
-    private function parse(string $slug): array
+    private function parse(string $slug, bool $strict): array
     {
         if ('' === $slug) {
             throw TINException::emptySlug();
@@ -153,7 +162,7 @@ final class TIN
 
         return [
             'country' => (string) $country,
-            'tin' => (string) $tin,
+            'tin' => true === $strict ? $this->normalizeTin((string) $tin) : (string) $tin,
         ];
     }
 }
