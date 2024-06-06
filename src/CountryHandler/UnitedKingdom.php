@@ -43,13 +43,7 @@ final class UnitedKingdom extends CountryHandler
 
     public function getTIN(): string
     {
-        $tin = parent::getTIN();
-
-        if (8 === strlen($tin)) {
-            $tin .= ' ';
-        }
-
-        return $tin;
+        return str_pad($this->normalizeTin(parent::getTIN()), 9, ' ', STR_PAD_RIGHT);
     }
 
     protected function hasValidLength(string $tin): bool
@@ -63,7 +57,11 @@ final class UnitedKingdom extends CountryHandler
             return false;
         }
 
-        return !($this->isFollowLength2($tin) && !$this->isFollowPattern2($tin));
+        if ($this->isFollowLength2($tin) && !$this->isFollowPattern2($tin)) {
+            return false;
+        }
+
+        return true;
     }
 
     private function isFollowLength1(string $tin): bool
