@@ -64,6 +64,21 @@ final class Spain extends CountryHandler
      */
     public const PATTERN_2 = '(^[ABCDEFGHJKLMNPQRSUVW])(\d{7})([' . self::CONTROL_2 . '\d]$)';
 
+    public function getTIN(): string
+    {
+        return str_pad(parent::getTIN(), self::LENGTH, '0', STR_PAD_LEFT);
+    }
+
+    protected function hasValidPattern(string $tin): bool
+    {
+        return $this->isFollowPattern1($tin) || $this->isFollowPattern2($tin);
+    }
+
+    protected function hasValidRule(string $tin): bool
+    {
+        return $this->isFollowRule1($tin) || $this->isFollowRule2($tin);
+    }
+
     /**
      * Return checksum char for Spanish TIN.
      *
@@ -75,7 +90,7 @@ final class Spain extends CountryHandler
      * @return null|string
      * Return checksum char or null on failure
      */
-    public static function getChecksum(string $tin, ?bool $digit = null): ? string
+    private function getChecksum(string $tin, ?bool $digit = null): ? string
     {
         // Natural Persons with DNI or NIE
         if (1 === preg_match('~' . self::PATTERN_1 . '?~', strtoupper($tin), $tinParts)) {
@@ -105,21 +120,6 @@ final class Spain extends CountryHandler
         return null;
     }
 
-    public function getTIN(): string
-    {
-        return str_pad(parent::getTIN(), self::LENGTH, '0', STR_PAD_LEFT);
-    }
-
-    protected function hasValidPattern(string $tin): bool
-    {
-        return $this->isFollowPattern1($tin) || $this->isFollowPattern2($tin);
-    }
-
-    protected function hasValidRule(string $tin): bool
-    {
-        return $this->isFollowRule1($tin) || $this->isFollowRule2($tin);
-    }
-
     private function isFollowPattern1(string $tin): bool
     {
         return $this->matchPattern($tin, self::PATTERN_1);
@@ -138,7 +138,7 @@ final class Spain extends CountryHandler
 
         [, $tinNumber, $tinChecksum] = $tinParts;
 
-        return self::getChecksum($tinNumber) === $tinChecksum;
+        return $this->getChecksum($tinNumber) === $tinChecksum;
     }
 
     private function isFollowRule2(string $tin): bool
@@ -152,6 +152,6 @@ final class Spain extends CountryHandler
         $tinNumber = $tinFirstLetter . $tinNumber;
         $digit = (false === strpos(self::CONTROL_2, $tinChecksum));
 
-        return self::getChecksum($tinNumber, $digit) === $tinChecksum;
+        return $this->getChecksum($tinNumber, $digit) === $tinChecksum;
     }
 }
