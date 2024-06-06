@@ -33,11 +33,7 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     public function getTIN(): string
     {
-        if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $this->tin)) {
-            return strtoupper($string);
-        }
-
-        return '';
+        return $this->tin;
     }
 
     final public static function supports(string $country): bool
@@ -47,7 +43,7 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     final public function validate(): bool
     {
-        $tin = $this->getTIN();
+        $tin = $this->normalizeTin($this->getTIN());
 
         if (!$this->hasValidLength($tin)) {
             throw TINException::invalidLength($this->tin);
@@ -116,6 +112,15 @@ abstract class CountryHandler implements CountryHandlerInterface
         return (int) end($split);
     }
 
+    protected function normalizeTin(string $tin): string
+    {
+        if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $tin)) {
+            return strtoupper($string);
+        }
+
+        return '';
+    }
+
     protected function hasValidDate(string $tin): bool
     {
         return true;
@@ -126,12 +131,12 @@ abstract class CountryHandler implements CountryHandlerInterface
      */
     protected function hasValidLength(string $tin): bool
     {
-        return $this->matchLength($this->getTIN(), static::LENGTH);
+        return $this->matchLength($this->normalizeTin($tin), static::LENGTH);
     }
 
     protected function hasValidPattern(string $tin): bool
     {
-        return $this->matchPattern($this->getTIN(), static::PATTERN);
+        return $this->matchPattern($this->normalizeTin($tin), static::PATTERN);
     }
 
     protected function hasValidRule(string $tin): bool
@@ -141,7 +146,7 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     protected function matchLength(string $tin, int $length): bool
     {
-        return strlen($tin) === $length;
+        return strlen($this->normalizeTin($tin)) === $length;
     }
 
     protected function matchPattern(string $subject, string $pattern): bool
