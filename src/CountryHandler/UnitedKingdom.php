@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
-use function strlen;
+use const STR_PAD_RIGHT;
 
 /**
  * United Kingdom.

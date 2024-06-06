@@ -112,15 +112,6 @@ abstract class CountryHandler implements CountryHandlerInterface
         return (int) end($split);
     }
 
-    protected function normalizeTin(string $tin): string
-    {
-        if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $tin)) {
-            return strtoupper($string);
-        }
-
-        return '';
-    }
-
     protected function hasValidDate(string $tin): bool
     {
         return true;
@@ -152,5 +143,14 @@ abstract class CountryHandler implements CountryHandlerInterface
     protected function matchPattern(string $subject, string $pattern): bool
     {
         return 1 === preg_match(sprintf('/%s/', $pattern), $subject);
+    }
+
+    protected function normalizeTin(string $tin): string
+    {
+        if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $tin)) {
+            return strtoupper($string);
+        }
+
+        return '';
     }
 }
