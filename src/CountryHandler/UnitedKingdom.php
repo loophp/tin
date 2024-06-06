@@ -43,7 +43,7 @@ final class UnitedKingdom extends CountryHandler
 
     public function getTIN(): string
     {
-        return str_pad($this->normalizeTin(parent::getTIN()), 9, ' ', STR_PAD_RIGHT);
+        return str_pad(parent::getTIN(), 9, ' ', STR_PAD_RIGHT);
     }
 
     protected function hasValidLength(string $tin): bool
