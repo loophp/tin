@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
 
-use function strlen;
-
 use const STR_PAD_LEFT;
 
 /**
@@ -18,6 +16,21 @@ use const STR_PAD_LEFT;
  */
 final class Spain extends CountryHandler
 {
+    /**
+     * @var string
+     */
+    public const CHECKSUM_LETTER = 'KLMNPQRSW';
+
+    /**
+     * @var string
+     */
+    public const CONTROL_1 = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+    /**
+     * @var string
+     */
+    public const CONTROL_2 = 'JABCDEFGHI';
+
     /**
      * @var string
      */
@@ -29,25 +42,27 @@ final class Spain extends CountryHandler
     public const LENGTH = 9;
 
     /**
-     * @var string
+     * @var array<string>
      */
-    public const PATTERN_1 = '\\d{8}[a-zA-Z]';
+    public const NIE = ['X', 'Y', 'Z'];
 
     /**
+     * Spanish Natural Persons: DNI
+     * Foreigners with NIE.
+     *
      * @var string
      */
-    public const PATTERN_2 = '[XYZKLMxyzklm]\\d{7}[a-zA-Z]';
+    public const PATTERN_1 = '(^[XYZ\d]\d{7})([' . self::CONTROL_1 . ']$)';
 
     /**
-     * @var array<int, string>
+     * Non-resident Spaniards without DNI
+     * Resident Spaniards under 14 without DNI
+     * Foreigners without NIE
+     * Legal entities (companies, organizations, public entities, ...).
+     *
+     * @var string
      */
-    private static $tabConvertToChar = [
-        'T', 'R', 'W', 'A', 'G',
-        'M', 'Y', 'F', 'P', 'D',
-        'X', 'B', 'N', 'J', 'Z',
-        'S', 'Q', 'V', 'H', 'L',
-        'C', 'K', 'E',
-    ];
+    public const PATTERN_2 = '(^[ABCDEFGHJKLMNPQRSUVW])(\d{7})([' . self::CONTROL_2 . '\d]$)';
 
     public function getTIN(): string
     {
@@ -61,33 +76,48 @@ final class Spain extends CountryHandler
 
     protected function hasValidRule(string $tin): bool
     {
-        return ($this->isFollowPattern1($tin) && $this->isFollowRule1($tin))
-            || ($this->isFollowPattern2($tin) && $this->isFollowRule2($tin));
+        return $this->isFollowRule1($tin) || $this->isFollowRule2($tin);
     }
 
-    private function getCharFromNumber(int $sum): string
+    /**
+     * Return checksum char for Spanish TIN.
+     *
+     * @param string $tin
+     * The TIN without Country indicative ('ES')
+     * @param null|bool $digit
+     * Optional: for Non-Natural Persons TIN forces return checksum char as digit 0-9
+     *
+     * @return null|string
+     * Return checksum char or null on failure
+     */
+    private function getChecksum(string $tin, ?bool $digit = null): ? string
     {
-        return self::$tabConvertToChar[$sum - 1];
-    }
+        // Natural Persons with DNI or NIE
+        if (1 === preg_match('~' . self::PATTERN_1 . '?~', strtoupper($tin), $tinParts)) {
+            $tinNumber = (int) str_replace(self::NIE, array_keys(self::NIE), $tinParts[1]);
 
-    private function getNumberFromChar(string $m): int
-    {
-        switch ($m) {
-            case 'K':
-            case 'L':
-            case 'M':
-            case 'X':
-                return 0;
-
-            case 'Y':
-                return 1;
-
-            case 'Z':
-                return 2;
-
-            default:
-                return -1;
+            return substr(self::CONTROL_1, $tinNumber % 23, 1);
         }
+
+        // Natural Persons without DNI or NIE and Non-Natural Persons
+        if (1 === preg_match('~' . self::PATTERN_2 . '?~', strtoupper($tin), $tinParts)) {
+            $checksum = 0;
+
+            foreach (str_split($tinParts[2]) as $pos => $val) {
+                $checksum += array_sum(str_split((string) ((int) $val * (2 - ($pos % 2)))));
+            }
+
+            $checksum1 = (string) ((10 - ($checksum % 10)) % 10);
+            $checksum2 = substr(self::CONTROL_2, (int) $checksum1, 1);
+
+            if (null === $digit) {
+                $digit = false === strpos(self::CHECKSUM_LETTER, $tinParts[1]);
+            }
+
+            return $digit ? $checksum1 : $checksum2;
+        }
+
+        return null;
     }
 
     private function isFollowPattern1(string $tin): bool
@@ -102,22 +132,26 @@ final class Spain extends CountryHandler
 
     private function isFollowRule1(string $tin): bool
     {
-        $number = (int) (substr($tin, 0, strlen($tin) - 1));
-        $checkDigit = $tin[strlen($tin) - 1];
-        $remainderBy23 = $number % 23;
-        $sum = $remainderBy23 + 1;
+        if (1 !== preg_match('~' . self::PATTERN_1 . '~', strtoupper($tin), $tinParts)) {
+            return false;
+        }
 
-        return $this->getCharFromNumber($sum) === $checkDigit;
+        [, $tinNumber, $tinChecksum] = $tinParts;
+
+        return $this->getChecksum($tinNumber) === $tinChecksum;
     }
 
     private function isFollowRule2(string $tin): bool
     {
-        $c1 = (string) $this->getNumberFromChar($tin[0]);
-        $number = (int) ($c1 . substr($tin, 1, strlen($tin)));
-        $checkDigit = $tin[strlen($tin) - 1];
-        $remainderBy23 = $number % 23;
-        $sum = $remainderBy23 + 1;
+        if (1 !== preg_match('~' . self::PATTERN_2 . '~', strtoupper($tin), $tinParts)) {
+            return false;
+        }
 
-        return $this->getCharFromNumber($sum) === $checkDigit;
+        [,$tinFirstLetter , $tinNumber, $tinChecksum] = $tinParts;
+
+        $tinNumber = $tinFirstLetter . $tinNumber;
+        $digit = (false === strpos(self::CONTROL_2, $tinChecksum));
+
+        return $this->getChecksum($tinNumber, $digit) === $tinChecksum;
     }
 }
