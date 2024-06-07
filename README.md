@@ -84,7 +84,10 @@ try {
 
 ## Strict Mode
 
-If you want to use a stricter method (without normalizing the TIN number, that is, using the raw TIN number), use the `strict` parameter in the `check` or `isValid` functions as shown below (Introduced in [#39](https://github.com/loophp/tin/pull/39)). By default, it is set to `false`.
+If you want to use a stricter method (without normalizing the TIN number, that
+is, using the raw TIN number), use the `strict` parameter in the `check` or
+`isValid` functions as shown below (Introduced in
+[#39](https://github.com/loophp/tin/pull/39)). By default, it is set to `false`.
 
 ```php
 TIN::fromSlug('be7110.2512345')->check(); // Not strict
@@ -142,3 +145,4 @@ Support our contributors by sponsoring them on [Github][github sponsors link].
   https://img.shields.io/github/actions/workflow/status/loophp/tin/tests.yml?branch=master&style=flat-square
 [github sponsors link]: https://github.com/loophp/tin/graphs/contributors
 [github actions link]: https://github.com/loophp/tin/actions
+```
