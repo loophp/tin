@@ -82,6 +82,17 @@ try {
 }
 ```
 
+## Strict Mode
+
+If you want to use a stricter method (without normalizing the TIN number, that is, using the raw TIN number), use the `strict` parameter in the `check` or `isValid` functions as shown below (Introduced in [#39](https://github.com/loophp/tin/pull/39)). By default, it is set to `false`.
+
+```php
+TIN::fromSlug('be7110.2512345')->check(); // Not strict
+TIN::fromSlug('be7110.2512345')->check(strict: false); // Not strict
+TIN::fromSlug('be7110.2512345')->check(true); // Strict
+TIN::fromSlug('be7110.2512345')->check(strict: true); // Strict
+
+
 ## Installation
 
 `composer require loophp/tin`
