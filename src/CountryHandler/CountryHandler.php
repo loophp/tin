@@ -33,11 +33,7 @@ abstract class CountryHandler implements CountryHandlerInterface
 
     public function getTIN(): string
     {
-        if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $this->tin)) {
-            return strtoupper($string);
-        }
-
-        return '';
+        return strtoupper($this->tin);
     }
 
     final public static function supports(string $country): bool

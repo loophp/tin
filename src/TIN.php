@@ -119,7 +119,7 @@ final class TIN
 
         return true;
     }
-
+    
     /**
      * @throws TINException
      */

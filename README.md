@@ -94,7 +94,7 @@ TIN::fromSlug('be7110.2512345')->check(); // Not strict
 TIN::fromSlug('be7110.2512345')->check(strict: false); // Not strict
 TIN::fromSlug('be7110.2512345')->check(true); // Strict
 TIN::fromSlug('be7110.2512345')->check(strict: true); // Strict
-
+```
 
 ## Installation
 
