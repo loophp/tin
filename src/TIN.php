@@ -120,6 +120,17 @@ final class TIN
         return true;
     }
 
+    public function hasAlgorithm(): bool
+    {
+        $parsedTin = $this->parse($this->slug, false);
+        foreach ($this->algorithms as $algorithm) {
+            if (true === $algorithm::supports($parsedTin['country'])) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     /**
      * @throws TINException
      */
