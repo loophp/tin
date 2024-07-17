@@ -37,7 +37,7 @@ Supported countries:
 - Poland (PL)
 - Portugal (PT)
 - Romania (RO) - no check digit
-- Slovakia (SK) - only structure
+- Slovakia (SK)
 - Slovenia (SI)
 - Spain (ES)
 - Sweden (SE)
