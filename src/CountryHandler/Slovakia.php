@@ -44,11 +44,12 @@ final class Slovakia extends CountryHandler
     protected function hasValidLength(string $tin): bool
     {
         $c1c2 = substr($tin, 0, 2);
+        $hasValidLength = parent::hasValidLength($tin);
 
         if (54 > $c1c2) {
-            return $this->matchLength($tin, self::LENGTH) || $this->matchLength($tin, self::LENGTH - 1);
+            return $hasValidLength || $this->matchLength($tin, self::LENGTH - 1);
         }
 
-        return parent::hasValidLength($tin);
+        return $hasValidLength;
     }
 }
