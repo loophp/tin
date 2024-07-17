@@ -27,7 +27,7 @@ final class France extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '[0-3]\\d{12}';
+    public const PATTERN = '[0-3]\d{12}';
 
     protected function hasValidRule(string $tin): bool
     {

@@ -34,22 +34,22 @@ final class Sweden extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN_1 = '\\d{2}[0-1]\\d[0-3]\\d{5}';
+    public const PATTERN_1 = '\d{2}[0-1]\d[0-3]\d{5}';
 
     /**
      * @var string
      */
-    public const PATTERN_2 = '\\d{2}[0-1]\\d[6-9]\\d{5}';
+    public const PATTERN_2 = '\d{2}[0-1]\d[6-9]\d{5}';
 
     /**
      * @var string
      */
-    public const PATTERN_3 = '(1[89]|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[1-2][0-9]|3[0-1])\\d{4}';
+    public const PATTERN_3 = '(1[89]|20)\d{2}(0[1-9]|1[012])(0[1-9]|[1-2][0-9]|3[0-1])\d{4}';
 
     /**
      * @var string
      */
-    public const PATTERN_4 = '(1[89]|20)\\d{2}(0[1-9]|1[012])(6[1-9]|[7-8][0-9]|9[0-1])\\d{4}';
+    public const PATTERN_4 = '(1[89]|20)\d{2}(0[1-9]|1[012])(6[1-9]|[7-8][0-9]|9[0-1])\d{4}';
 
     protected function hasValidLength(string $tin): bool
     {

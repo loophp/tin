@@ -26,7 +26,7 @@ final class Slovakia extends CountryHandler
      */
     public const LENGTH = 10;
 
-    public const PATTERN = '([1-9]\\d[234789]\\d{7})|(\\d{2}[0156]\\d[0-3]\\d{4,5})';
+    public const PATTERN = '([1-9]\d[234789]\d{7})|(\d{2}[0156]\d[0-3]\d{4,5})';
 
     public function hasValidRule(string $tin): bool
     {

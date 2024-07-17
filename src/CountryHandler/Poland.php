@@ -32,12 +32,12 @@ final class Poland extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN_1 = '\\d{10}';
+    public const PATTERN_1 = '\d{10}';
 
     /**
      * @var string
      */
-    public const PATTERN_2 = '\\d{11}';
+    public const PATTERN_2 = '\d{11}';
 
     protected function hasValidDateWhenPattern2(string $tin): bool
     {

@@ -27,7 +27,7 @@ final class Finland extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '[0-3]\\d[0-1]\\d{3}[+-A]\\d{3}[0-9A-Z]';
+    public const PATTERN = '[0-3]\d[0-1]\d{3}[+-A]\d{3}[0-9A-Z]';
 
     protected function hasValidDate(string $tin): bool
     {

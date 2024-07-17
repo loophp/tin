@@ -29,7 +29,7 @@ final class Cyprus extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '[0,9]\\d{7}[A-Z]';
+    public const PATTERN = '[0,9]\d{7}[A-Z]';
 
     protected function hasValidRule(string $tin): bool
     {

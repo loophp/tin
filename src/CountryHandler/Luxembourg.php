@@ -29,7 +29,7 @@ final class Luxembourg extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '(1[89]|20)\\d{2}(0[1-9]|1[012])(0[1-9]|[1-2][0-9]|3[0-1])\\d{5}';
+    public const PATTERN = '(1[89]|20)\d{2}(0[1-9]|1[012])(0[1-9]|[1-2][0-9]|3[0-1])\d{5}';
 
     /**
      * @var array<int, array<int, int>>

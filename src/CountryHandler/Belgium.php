@@ -27,7 +27,7 @@ final class Belgium extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '\\d{2}[0-1]\\d[0-3]\\d{6}';
+    public const PATTERN = '\d{2}[0-1]\d[0-3]\d{6}';
 
     protected function hasValidDate(string $tin): bool
     {

@@ -34,12 +34,12 @@ final class Germany extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN_1 = '[1-9]\\d{10}';
+    public const PATTERN_1 = '[1-9]\d{10}';
 
     /**
      * @var string
      */
-    public const PATTERN_2 = '[1-9]\\d{10}';
+    public const PATTERN_2 = '[1-9]\d{10}';
 
     protected function hasValidLength(string $tin): bool
     {

@@ -34,12 +34,12 @@ final class Ireland extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN_1 = '\\d{7}[a-wA-W]([a-iA-I]|W)';
+    public const PATTERN_1 = '\d{7}[a-wA-W]([a-iA-I]|W)';
 
     /**
      * @var string
      */
-    public const PATTERN_2 = '\\d{7}[a-wA-W]';
+    public const PATTERN_2 = '\d{7}[a-wA-W]';
 
     protected function hasValidLength(string $tin): bool
     {

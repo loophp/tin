@@ -27,7 +27,7 @@ final class Croatia extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '\\d{11}';
+    public const PATTERN = '\d{11}';
 
     protected function hasValidRule(string $tin): bool
     {

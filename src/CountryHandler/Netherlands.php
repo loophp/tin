@@ -27,7 +27,7 @@ final class Netherlands extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '\\d{9}';
+    public const PATTERN = '\d{9}';
 
     protected function hasValidRule(string $tin): bool
     {

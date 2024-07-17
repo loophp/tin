@@ -27,7 +27,7 @@ final class Bulgaria extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '\\d{10}';
+    public const PATTERN = '\d{10}';
 
     protected function hasValidDate(string $tin): bool
     {

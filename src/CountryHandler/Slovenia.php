@@ -27,7 +27,7 @@ final class Slovenia extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '[1-9]\\d{7}';
+    public const PATTERN = '[1-9]\d{7}';
 
     protected function hasValidRule(string $tin): bool
     {

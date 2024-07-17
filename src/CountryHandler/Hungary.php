@@ -27,7 +27,7 @@ final class Hungary extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN = '8\\d{9}';
+    public const PATTERN = '8\d{9}';
 
     protected function hasValidRule(string $tin): bool
     {

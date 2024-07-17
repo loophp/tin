@@ -34,12 +34,12 @@ final class UnitedKingdom extends CountryHandler
     /**
      * @var string
      */
-    public const PATTERN_1 = '\\d{10}';
+    public const PATTERN_1 = '\d{10}';
 
     /**
      * @var string
      */
-    public const PATTERN_2 = '[a-ceg-hj-pr-tw-zA-CEG-HJ-PR-TW-Z][a-ceg-hj-npr-tw-zA-CEG-HJ-NPR-TW-Z]\\d{6}[abcdABCD ]';
+    public const PATTERN_2 = '[a-ceg-hj-pr-tw-zA-CEG-HJ-PR-TW-Z][a-ceg-hj-npr-tw-zA-CEG-HJ-NPR-TW-Z]\d{6}[abcdABCD ]';
 
     public function getTIN(): string
     {
