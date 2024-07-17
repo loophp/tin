@@ -1,10 +1,5 @@
 <?php
 
-/**
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -13,71 +8,34 @@ use loophp\Tin\Exception\TINException;
 
 use function strlen;
 
-/**
- * Base handler class.
- */
 abstract class CountryHandler implements CountryHandlerInterface
 {
-    /**
-     * @var string
-     */
-    private $tin;
-
-    /**
-     * CountryHandler constructor.
-     */
-    final public function __construct(string $tin = '')
-    {
-        $this->tin = $tin;
-    }
-
-    public function getTIN(): string
-    {
-        if (null !== $string = preg_replace('#[^[:alnum:]\-+]#u', '', $this->tin)) {
-            return strtoupper($string);
-        }
-
-        return '';
-    }
-
     final public static function supports(string $country): bool
     {
         return strtoupper($country) === strtoupper(static::COUNTRYCODE);
     }
 
-    final public function validate(): bool
+    final public function validate(string $tin): bool
     {
-        $tin = $this->getTIN();
+        $normalizedTin = $this->normalizeTin($tin);
 
-        if (!$this->hasValidLength($tin)) {
-            throw TINException::invalidLength($this->tin);
+        if (!$this->hasValidLength($normalizedTin)) {
+            throw TINException::invalidLength($tin);
         }
 
-        if (!$this->hasValidPattern($tin)) {
-            throw TINException::invalidPattern($this->tin);
+        if (!$this->hasValidPattern($normalizedTin)) {
+            throw TINException::invalidPattern($tin);
         }
 
-        if (!$this->hasValidDate($tin)) {
-            throw TINException::invalidDate($this->tin);
+        if (!$this->hasValidDate($normalizedTin)) {
+            throw TINException::invalidDate($tin);
         }
 
-        if (!$this->hasValidRule($tin)) {
-            throw TINException::invalidSyntax($this->tin);
+        if (!$this->hasValidRule($normalizedTin)) {
+            throw TINException::invalidSyntax($tin);
         }
 
         return true;
-    }
-
-    /**
-     * @param string $tin
-     *   The TIN.
-     */
-    final public function withTIN(string $tin): CountryHandlerInterface
-    {
-        $clone = clone $this;
-        $clone->tin = $tin;
-
-        return $clone;
     }
 
     /**
@@ -126,12 +84,12 @@ abstract class CountryHandler implements CountryHandlerInterface
      */
     protected function hasValidLength(string $tin): bool
     {
-        return $this->matchLength($this->getTIN(), static::LENGTH);
+        return $this->matchLength($tin, static::LENGTH);
     }
 
     protected function hasValidPattern(string $tin): bool
     {
-        return $this->matchPattern($this->getTIN(), static::PATTERN);
+        return $this->matchPattern($tin, static::PATTERN);
     }
 
     protected function hasValidRule(string $tin): bool

@@ -1,10 +1,5 @@
 <?php
 
-/**
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -64,11 +59,6 @@ final class Spain extends CountryHandler
      */
     public const PATTERN_2 = '(^[ABCDEFGHJKLMNPQRSUVW])(\d{7})([' . self::CONTROL_2 . '\d]$)';
 
-    public function getTIN(): string
-    {
-        return str_pad(parent::getTIN(), self::LENGTH, '0', STR_PAD_LEFT);
-    }
-
     protected function hasValidPattern(string $tin): bool
     {
         return $this->isFollowPattern1($tin) || $this->isFollowPattern2($tin);
@@ -77,6 +67,13 @@ final class Spain extends CountryHandler
     protected function hasValidRule(string $tin): bool
     {
         return $this->isFollowRule1($tin) || $this->isFollowRule2($tin);
+    }
+
+    protected function normalizeTin(string $tin): string
+    {
+        $tin = parent::normalizeTin($tin);
+
+        return str_pad($tin, self::LENGTH, '0', STR_PAD_LEFT);
     }
 
     /**

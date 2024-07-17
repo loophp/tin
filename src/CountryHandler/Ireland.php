@@ -1,10 +1,5 @@
 <?php
 
-/**
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -48,11 +43,11 @@ final class Ireland extends CountryHandler
 
     protected function hasValidPattern(string $tin): bool
     {
-        if ($this->isFollowLength1($tin) && !$this->isFollowPattern1()) {
+        if ($this->isFollowLength1($tin) && !$this->isFollowPattern1($tin)) {
             return false;
         }
 
-        return !($this->isFollowLength2($tin) && !$this->isFollowPattern2());
+        return !($this->isFollowLength2($tin) && !$this->isFollowPattern2($tin));
     }
 
     protected function hasValidRule(string $tin): bool
@@ -86,14 +81,14 @@ final class Ireland extends CountryHandler
         return $this->matchLength($tin, self::LENGTH_2);
     }
 
-    private function isFollowPattern1(): bool
+    private function isFollowPattern1(string $tin): bool
     {
-        return $this->matchPattern($this->getTIN(), self::PATTERN_1);
+        return $this->matchPattern($tin, self::PATTERN_1);
     }
 
-    private function isFollowPattern2(): bool
+    private function isFollowPattern2(string $tin): bool
     {
-        return $this->matchPattern($this->getTIN(), self::PATTERN_2);
+        return $this->matchPattern($tin, self::PATTERN_2);
     }
 
     private function letterToNumber(string $toConv): int

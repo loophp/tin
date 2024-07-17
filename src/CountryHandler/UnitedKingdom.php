@@ -1,10 +1,5 @@
 <?php
 
-/**
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace loophp\Tin\CountryHandler;
@@ -41,18 +36,17 @@ final class UnitedKingdom extends CountryHandler
      */
     public const PATTERN_2 = '[a-ceg-hj-pr-tw-zA-CEG-HJ-PR-TW-Z][a-ceg-hj-npr-tw-zA-CEG-HJ-NPR-TW-Z]\d{6}[abcdABCD ]';
 
-    public function getTIN(): string
-    {
-        return str_pad(parent::getTIN(), 9, ' ', STR_PAD_RIGHT);
-    }
-
     protected function hasValidLength(string $tin): bool
     {
+        $tin = str_pad($tin, 9, ' ', STR_PAD_RIGHT);
+
         return $this->isFollowLength1($tin) || $this->isFollowLength2($tin);
     }
 
     protected function hasValidPattern(string $tin): bool
     {
+        $tin = str_pad($tin, 9, ' ', STR_PAD_RIGHT);
+
         if ($this->isFollowLength1($tin) && !$this->isFollowPattern1($tin)) {
             return false;
         }

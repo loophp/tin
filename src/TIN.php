@@ -1,10 +1,5 @@
 <?php
 
-/**
- * For the full copyright and license information, please view
- * the LICENSE file that was distributed with this source code.
- */
-
 declare(strict_types=1);
 
 namespace loophp\Tin;
@@ -96,7 +91,7 @@ final class TIN
     {
         $parsedTin = $this->parse($this->slug, $strict);
 
-        return $this->getAlgorithm($parsedTin['country'], $parsedTin['tin'])->validate();
+        return $this->getAlgorithm($parsedTin['country'])->validate($parsedTin['tin']);
     }
 
     public static function from(string $countryCode, string $tin): TIN
@@ -134,11 +129,11 @@ final class TIN
     /**
      * @throws TINException
      */
-    private function getAlgorithm(string $country, ?string $tin = null): CountryHandlerInterface
+    private function getAlgorithm(string $country): CountryHandlerInterface
     {
         foreach (self::$algorithms as $algorithm) {
             if (true === $algorithm::supports($country)) {
-                $handler = new $algorithm($tin);
+                $handler = new $algorithm();
 
                 if ($handler instanceof CountryHandlerInterface) {
                     return $handler;
