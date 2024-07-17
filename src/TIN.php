@@ -48,7 +48,7 @@ final class TIN
     /**
      * @var array<string, class-string>
      */
-    private $algorithms = [
+    private static $algorithms = [
         'AT' => Austria::class,
         'BE' => Belgium::class,
         'BG' => Bulgaria::class,
@@ -109,6 +109,17 @@ final class TIN
         return new self($slug);
     }
 
+    public static function isCountrySupported(string $countryCode): bool
+    {
+        foreach (self::$algorithms as $algorithm) {
+            if (true === $algorithm::supports($countryCode)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function isValid(bool $strict = false): bool
     {
         try {
@@ -125,7 +136,7 @@ final class TIN
      */
     private function getAlgorithm(string $country, ?string $tin = null): CountryHandlerInterface
     {
-        foreach ($this->algorithms as $algorithm) {
+        foreach (self::$algorithms as $algorithm) {
             if (true === $algorithm::supports($country)) {
                 $handler = new $algorithm($tin);
 
