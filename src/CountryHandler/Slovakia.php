@@ -30,16 +30,15 @@ final class Slovakia extends CountryHandler
 
     public function hasValidRule(string $tin): bool
     {
-        if (strlen($tin) === 10
-            && (int) $tin % 11 === 0) {
-            return true;
-        }
-
         if (strlen($tin) === 10) {
+            if ((int) $tin % 11 === 0) {
+                return true;
+            }
+
             return (int) substr($tin, 9, 1) === ((int) substr($tin, 0, 9) % 11) % 10;
         }
 
-        return strlen($tin) === 9;
+        return true;
     }
 
     protected function hasValidLength(string $tin): bool
