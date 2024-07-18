@@ -39,7 +39,7 @@ Supported countries:
 - Romania (RO) - no check digit
 - Slovakia (SK)
 - Slovenia (SI)
-- Spain (ES)
+- [Spain (ES)](docs/TIN-Country_Sheet_ES.md)
 - Sweden (SE)
 - United Kingdom (UK) - only structure
 
